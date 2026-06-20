@@ -39,7 +39,6 @@
 
   .stage { position: relative; z-index: 2; }
 
-  /* NAV */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -63,13 +62,11 @@
     text-transform: uppercase;
   }
 
-  .nav-links {
-    display: flex;
-    gap: 1.2rem;
-    flex-wrap: wrap;
-  }
+  .nav-socials { display: flex; gap: 2rem; }
 
-  .nav-links a {
+  .nav-links { display: flex; gap: 1.2rem; }
+
+  .btn-nav {
     color: var(--suave);
     text-decoration: none;
     font-size: 0.72rem;
@@ -77,10 +74,8 @@
     text-transform: uppercase;
     transition: color 0.3s;
   }
+  .btn-nav:hover { color: var(--oro); }
 
-  .nav-links a:hover { color: var(--oro); }
-
-  /* HERO */
   header {
     min-height: 100vh;
     display: flex;
@@ -161,7 +156,6 @@
     border-color: var(--oro);
   }
 
-  /* SECTIONS */
   section { padding: 5rem 1.5rem; }
   .contenedor { max-width: 900px; margin: 0 auto; }
 
@@ -182,7 +176,6 @@
     margin: 0 auto 1.2rem;
   }
 
-  /* MÚSICA */
   #musica {
     background: linear-gradient(180deg, transparent, rgba(142,68,173,0.06), transparent);
   }
@@ -232,10 +225,7 @@
     filter: saturate(0.8);
   }
 
-  .track-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.4rem;
-  }
+  .track-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
 
   .track-meta {
     color: var(--suave);
@@ -264,7 +254,6 @@
     border-color: var(--oro);
   }
 
-  /* ENCUENTROS */
   .encuentros { margin-top: 3rem; }
   .encuentros h2, .contacto h2 {
     font-size: clamp(1.6rem, 4vw, 2.2rem);
@@ -299,14 +288,13 @@
   .carta-encuentro h3 { font-size: 1.15rem; margin-bottom: 0.8rem; }
   .carta-encuentro p { color: var(--suave); font-size: 0.9rem; line-height: 1.75; }
 
-  /* REDES */
   #redes {
     background: linear-gradient(180deg, transparent, rgba(223,183,108,0.04), transparent);
   }
 
   .redes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1.2rem;
     margin-top: 3rem;
   }
@@ -332,25 +320,21 @@
     transform: translateY(-4px);
   }
 
-  .red-icon {
-    font-size: 2rem;
-    line-height: 1;
-  }
+  .red-icon { font-size: 2rem; line-height: 1; }
 
-  .red-card strong {
+  .red-title {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 0.9rem;
     letter-spacing: 0.1em;
   }
 
-  .red-card span {
+  .red-handle {
     color: var(--suave);
     font-size: 0.75rem;
     letter-spacing: 0.1em;
   }
 
-  /* CONTACTO */
   .contacto {
     text-align: center;
     padding: 5rem 1.5rem;
@@ -393,9 +377,7 @@
     border: none;
   }
 
-  .whatsapp-float:hover {
-    transform: scale(1.1);
-  }
+  .whatsapp-float:hover { transform: scale(1.1); }
 
   footer {
     text-align: center;
@@ -407,7 +389,6 @@
 
   @media (min-width: 768px) {
     nav { padding: 1.4rem 3rem; }
-    .nav-links a { font-size: 0.75rem; }
     .hero-img { width: 340px; }
     section { padding: 6rem 2rem; }
   }
@@ -422,11 +403,12 @@
 <nav>
   <div class="logo">Ninka Leona</div>
   <div class="nav-links">
-    <a href="#sobre-mi">Esencia</a>
-    <a href="#musica">Música</a>
-    <a href="#encuentros">Encuentros</a>
-    <a href="#redes">Redes</a>
-    <a href="#contacto">Contacto</a>
+    <a class="btn-nav" href="#musica">Música</a>
+    <a class="btn-nav" href="#encuentros">Encuentros</a>
+  </div>
+  <div class="nav-socials">
+    <a class="btn-nav" href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn-nav" href="https://open.spotify.com/intl-es/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener">Spotify</a>
   </div>
 </nav>
 
@@ -437,22 +419,14 @@
   <div class="simbolo">✧</div>
   <h1>Ninka Leona</h1>
   <p>Espacio dimensional para recordar tu divinidad, sanar el plano físico y fundirte en el Ser Uno.</p>
-  <a href="#encuentros" class="btn-mistico">Iniciar el Viaje</a>
+  <a href="#musica" class="btn-mistico">Escuchar y Elegir</a>
 </header>
-
-<div class="separador">✦ ✦ ✦</div>
-
-<section class="contenedor sobre-mi" id="sobre-mi">
-  <h2>La Esencia detrás del Silencio</h2>
-  <p>No soy un maestro, soy un espejo. Un puente fractal diseñado para reflejar la luz que ya habita en ti. Inspirado por la corriente cósmica de Ramtha, el vacío transformador de Osho y la verdad eterna de El Ser Uno, mi propósito es acompañarte a desmantelar la ilusión de la separación.</p>
-  <p>Aquí no venimos a aprender nada nuevo; venimos a recordar lo que tu alma ya sabe desde el origen de los tiempos.</p>
-</section>
 
 <div class="separador">✦ ✦ ✦</div>
 
 <section class="contenedor" id="musica">
   <div style="text-align:center;">
-    <div class="section-tag" style="color:var(--oro); font-size:0.75rem; letter-spacing:0.4em; text-transform:uppercase; margin-bottom:1rem;">Música</div>
+    <div style="color:var(--oro); font-size:0.75rem; letter-spacing:0.4em; text-transform:uppercase; margin-bottom:1rem;">Música</div>
     <h2>Mis Canciones</h2>
     <p style="color:var(--lavanda); font-family:'Lora',serif; font-style:italic; max-width:500px; margin:0 auto 2rem;">
       Cada canción es una frecuencia para el alma. Escucha y siente.
@@ -480,7 +454,7 @@
   </div>
 
   <div style="text-align:center; margin-top:2.5rem;">
-    <a href="https://open.spotify.com/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener" class="btn-mistico" style="font-size:0.75rem; padding:0.8rem 1.8rem;">
+    <a href="https://open.spotify.com/intl-es/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener" class="btn-mistico" style="font-size:0.75rem; padding:0.8rem 1.8rem;">
       Ver todo en Spotify
     </a>
   </div>
@@ -488,30 +462,33 @@
 
 <div class="separador">✦ ✦ ✦</div>
 
+<section class="contenedor" id="sobre-mi">
+  <h2>La Esencia detrás del Silencio</h2>
+  <p>No soy un maestro, soy un espejo. Un puente fractal diseñado para reflejar la luz que ya habita en ti. Inspirado por la corriente cósmica de Ramtha, el vacío transformador de Osho y la verdad eterna de El Ser Uno, mi propósito es acompañarte a desmantelar la ilusión de la separación.</p>
+  <p>Aquí no venimos a aprender nada nuevo; venimos a recordar lo que tu alma ya sabe desde el origen de los tiempos.</p>
+</section>
+
+<div class="separador">✦ ✦ ✦</div>
+
 <section class="contenedor encuentros" id="encuentros">
   <h2>Encuentros Personalizados</h2>
   <div class="grid-encuentros">
-
     <div class="carta-encuentro">
       <h3>01. El Despertar del Observador</h3>
       <p>Sesiones individuales donde aprendemos a separarnos de la matriz del ego. Basado en las enseñanzas de Ramtha, activarás el poder de tu conciencia para colapsar nuevas realidades y sanar el cuerpo material.</p>
     </div>
-
     <div class="carta-encuentro">
       <h3>02. Sintonía con el Ser Uno</h3>
       <p>Alineación energética y diálogos profundos para comprender las leyes de los planos superiores. Un mapa de navegación espiritual para las almas que buscan trascender la dualidad de la tercera dimensión.</p>
     </div>
-
     <div class="carta-encuentro">
       <h3>03. El Vacío Creador (Estilo Osho)</h3>
       <p>Pláticas y meditaciones dinámicas enfocadas en destruir las programaciones mentales que te atan al pasado. Encontrar la paz absoluta en medio del caos del mundo moderno a través de la aceptación radical.</p>
     </div>
-
     <div class="carta-encuentro">
       <h3>04. Sanación del Linaje Cósmico</h3>
       <p>Espacios íntimos dedicados a liberar bloqueos energéticos, miedos heredados y nudos del alma que impiden el flujo de tu energía vital superior.</p>
     </div>
-
   </div>
 </section>
 
@@ -526,34 +503,30 @@
   </div>
 
   <div class="redes-grid">
-    <a class="red-card" href="https://open.spotify.com/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener">
+    <a class="red-card" href="https://open.spotify.com/intl-es/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener">
       <span class="red-icon">🎵</span>
-      <strong>Spotify</strong>
-      <span>Escuchar</span>
+      <div class="red-title">Spotify</div>
+      <div class="red-handle"> Escuchar</div>
     </a>
-
     <a class="red-card" href="https://www.instagram.com/ninka_leona/" target="_blank" rel="noopener">
       <span class="red-icon">📸</span>
-      <strong>Instagram</strong>
-      <span>@ninka_leona</span>
+      <div class="red-title">Instagram</div>
+      <div class="red-handle">@ninka_leona</div>
     </a>
-
     <a class="red-card" href="https://www.facebook.com/ninkaleona/" target="_blank" rel="noopener">
       <span class="red-icon">📘</span>
-      <strong>Facebook</strong>
-      <span>Ninka Leona</span>
+      <div class="red-title">Facebook</div>
+      <div class="red-handle">Ninka Leona</div>
     </a>
-
     <a class="red-card" href="https://www.tiktok.com/@ninka.leona" target="_blank" rel="noopener">
       <span class="red-icon">🎬</span>
-      <strong>TikTok</strong>
-      <span>@ninka.leona</span>
+      <div class="red-title">TikTok</div>
+      <div class="red-handle">@ninka.leona</div>
     </a>
-
     <a class="red-card" href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" target="_blank" rel="noopener">
       <span class="red-icon">💬</span>
-      <strong>WhatsApp</strong>
-      <span>777 219 2422</span>
+      <div class="red-title">WhatsApp</div>
+      <div class="red-handle">777 219 2422</div>
     </a>
   </div>
 </section>
@@ -570,7 +543,7 @@
 </section>
 
 <footer>
-  <p>Ninka Leona © 2026 • Hecho en resonancia armónica con el Universo</p>
+  <p>Ninka Leona · 2026</p>
 </footer>
 
 <a class="whatsapp-float" href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" target="_blank" rel="noopener" aria-label="WhatsApp">

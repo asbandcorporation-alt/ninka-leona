@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ninka Leona — Música · Despertar · Alma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #d4af37;
+    --gold-bright: #f3d77e;
+    --gold-dim: #8b7235;
+    --void: #05020f;
+    --deep: #0a0520;
+    --nebula: #1c0d4d;
+    --accent: #8b5cf6;
+    --accent2: #6366f1;
+    --text: #e8e0f0;
+    --muted: #9a8bc2;
+    --glass: rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.08);
+    --glass-hover: rgba(255,255,255,0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--void);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+    cursor: default;
+  }
+
+  /* ─── COSMIC CANVAS ─── */
+  #cosmos {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(99,102,241,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(212,175,55,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(139,92,246,0.1) 0%, transparent 60%),
+      var(--void);
+  }
+
+  .stage { position: relative; z-index: 2; }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  .noise {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.035;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ─── CUSTOM CURSOR ─── */
+  .cursor-glow {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 400;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out, opacity 0.3s;
+    mix-blend-mode: screen;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 500;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(5,2,15,0.9) 0%, rgba(5,2,15,0) 100%);
+    backdrop-filter: blur(0px);
+    transition: all 0.4s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(5,2,15,0.85);
+    backdrop-filter: blur(20px) saturate(140%);
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px rgba(212,175,55,0.5));
+  }
+
+  .nav-socials {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-socials a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .nav-socials a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+
+  .nav-socials a:hover { color: var(--gold-bright); }
+  .nav-socials a:hover::after { width: 100%; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-img-wrapper {
+    position: relative;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: radial-gradient(circle at 30% 30%, rgba(139,92,246,0.3), rgba(10,5,32,0.8));
+    box-shadow:
+      0 0 80px rgba(139,92,246,0.4),
+      0 0 160px rgba(212,175,55,0.2),
+      inset 0 0 60px rgba(212,175,55,0.1);
+    animation: float 8s ease-in-out infinite;
+    border: 1px solid rgba(212,175,55,0.2);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-20px) rotate(1deg); }
+  }
+
+  .hero-img-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,175,55,0.2);
+    animation: rotate-ring 20s linear infinite;
+    z-index: -1;
+  }
+
+  @keyframes rotate-ring {
+    100% { transform: rotate(360deg); }
+  }
+
+  .hero-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.8) contrast(1.1);
+    mix-blend-mode: luminosity;
+    opacity: 0.9;
+  }
+
+  .hero-content { max-width: 580px; }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    background: linear-gradient(180deg, #fff 0%, var(--gold-bright) 40%, var(--gold-dim) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title-ital {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold-bright);
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    max-width: 420px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: all 0.4s;
+    cursor: pointer;
+    border: none;
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), #b8942f);
+    color: var(--void);
+    border-color: transparent;
+    font-weight: 600;
+    box-shadow: 0 0 40px rgba(212,175,55,0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 60px rgba(212,175,55,0.6);
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  }
+
+  .btn-outline:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--gold);
+    color: var(--gold-bright);
+    transform: translateY(-2px);
+  }
+
+  /* Custom Spotify player */
+  .player-wrap {
+    margin-top: 2.5rem;
+    position: relative;
+  }
+
+  .player-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .player-label::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--gold); }
+    50%      { opacity: 0.3; box-shadow: 0 0 2px var(--gold); }
+  }
+
+  .custom-player {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 20px;
+    padding: 1.2rem 1.6rem;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    transition: all 0.3s;
+  }
+
+  .custom-player:hover {
+    border-color: rgba(212,175,55,0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.1);
+  }
+
+  .custom-player iframe { border-radius: 12px !important; }
+
+  /* ─── SECTION STYLES ─── */
+  section {
+    padding: 8rem 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .section-header {
+    margin-bottom: 5rem;
+  }
+
+  .section-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  .section-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-top: 2rem;
+  }
+
+  /* ─── DESPERTAR SECTION ─── */
+  #despertar {
+    background: linear-gradient(180deg, transparent 0%, rgba(99,102,241,0.04) 50%, transparent 100%);
+  }
+
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .philosophy-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    backdrop-filter: blur(20px);
+    transition: all 0.5s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .philosophy-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(212,175,55,0.1), transparent 60%);
+    transform: translate(-100%, -100%);
+    transition: transform 0.6s;
+  }
+
+  .philosophy-card:hover::before {
+    transform: translate(0, 0);
+  }
+
+  .philosophy-card:hover {
+    border-color: rgba(212,175,55,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(139,92,246,0.15);
+  }
+
+  .philosophy-card .icon {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    display: block;
+    filter: grayscale(0.3);
+  }
+
+  .philosophy-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    color: var(--gold-bright);
+    margin-bottom: 1rem;
+    font-weight: 500;
+    position: relative;
+  }
+
+  .philosophy-card p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.9;
+    position: relative;
+  }
+
+  .quote-large {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(212,175,55,0.05), rgba(139,92,246,0.05));
+    border-radius: 32px;
+    border: 1px solid rgba(212,175,55,0.15);
+    margin-top: 2rem;
+  }
+
+  .quote-large .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-style: italic;
+    color: var(--gold-bright);
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    display: block;
+  }
+
+  .quote-large .quote-author {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ─── MUSIC SECTION ─── */
+  #musica {
+    position: relative;
+  }
+
+  .tracks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .track-row {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    transition: all 0.4s;
+    backdrop-filter: blur(10px);
+  }
+
+  .track-row:hover {
+    border-color: rgba(212,175,55,0.3);
+    background: var(--glass-hover);
+    transform: translateX(8px);
+  }
+
+  .track-art {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  }
+
+  .track-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .track-info h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+
+  .track-info .meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .track-play {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), #b8942f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 8px 24px rgba(212,175,55,0.3);
+  }
+
+  .track-play:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 32px rgba(212,175,55,0.5);
+  }
+
+  .track-play svg {
+    fill: var(--void);
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ─── ABOUT SECTION ─── */
+  #sobre {
+    background: linear-gradient(180deg, transparent 0%, rgba(139,92,246,0.05) 50%, transparent 100%);
+  }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .about-image {
+    position: relative;
+    border-radius: 40px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: radial-gradient(circle at 30% 30%, rgba(139,92,246,0.3), rgba(10,5,32,0.9));
+    border: 1px solid rgba(212,175,55,0.15);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: luminosity;
+    opacity: 0.85;
+    filter: contrast(1.1) saturate(0.8);
+  }
+
+  .about-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    color: var(--gold-bright);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+
+  .about-content p {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.9;
+  }
+
+  .stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--glass-border);
+  }
+
+  .stat .number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--gold-bright);
+    letter-spacing: 0.05em;
+    display: block;
+    line-height: 1;
+  }
+
+  .stat .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+  }
+
+  /* ─── CONNECTION SECTION ─── */
+  #conexion {
+    text-align: center;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .social-card {
+    padding: 2.5rem 2rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    text-decoration: none;
+    color: var(--text);
+    backdrop-filter: blur(20px);
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .social-card::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle at center, rgba(139,92,246,0.15), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .social-card:hover::before { opacity: 1; }
+
+  .social-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-6px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 40px rgba(212,175,55,0.2);
+  }
+
+  .social-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(139,92,246,0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    position: relative;
+  }
+
+  .social-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    position: relative;
+  }
+
+  .social-card .handle {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    position: relative;
+  }
+
+  /* ─── CONTACT CTA ─── */
+  .final-cta {
+    margin-top: 5rem;
+    padding: 4rem;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(139,92,246,0.15));
+    border-radius: 40px;
+    border: 1px solid rgba(212,175,55,0.2);
+    text-align: center;
+    backdrop-filter: blur(20px);
+  }
+
+  .final-cta h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--gold-bright);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .final-cta p {
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 3rem;
+    text-align: center;
+    border-top: 1px solid var(--glass-border);
+    background: rgba(5,2,15,0.8);
+    backdrop-filter: blur(20px);
+  }
+
+  .footer-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--gold-bright); }
+
+  .copyright {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    opacity: 0.6;
+  }
+
+  /* ─── REVEAL ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 960px) {
+    nav { padding: 1rem 2rem; }
+    .nav-socials { gap: 1rem; }
+    .hero {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: 6rem 2rem 3rem;
+      gap: 3rem;
+    }
+    .hero-content { max-width: 100%; }
+    .hero-socials { justify-content: center; }
+    .hero-actions { justify-content: center; }
+    .hero-subtitle { margin: 0 auto 2rem; }
+    .hero-img-wrapper { width: 260px; height: 260px; }
+    section { padding: 5rem 2rem; }
+    .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .about-image { max-width: 350px; margin: 0 auto; }
+    .track-row { grid-template-columns: 48px 1fr; }
+    .track-play { grid-column: 2; justify-self: start; }
+  }
+
+  @media (max-width: 600px) {
+    .logo { font-size: 0.85rem; letter-spacing: 0.3em; }
+    .nav-socials { display: none; }
+    h1 { font-size: 3rem; }
+    .btn { padding: 0.8rem 1.5rem; font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="cosmos"></canvas>
+<div class="noise"></div>
+<div class="cursor-glow" id="cursor"></div>
+
+<div class="stage">
+
+<nav id="nav">
+  <div class="logo">Ninka Leona</div>
+  <div class="nav-socials">
+    <a href="https://open.spotify.com/artist/7vumHnlggf6TSzjCi0B8V8">Spotify</a>
+    <a href="https://www.instagram.com/ninka_leona/">Instagram</a>
+    <a href="https://www.facebook.com/ninkaleona/">Facebook</a>
+    <a href="https://www.tiktok.com/@ninka.leona">TikTok</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-visual reveal">
+    <div class="hero-img-wrapper">
+      <img
+        src="https://i.scdn.co/image/ab67616d000011ebedf6ca1b2a76ca8794728d1d"
+        alt="Ninka Leona"
+        loading="eager"
+      >
+    </div>
+  </div>
+
+  <div class="hero-content reveal">
+    <div class="hero-eyebrow">Música y despertar · 2025</div>
+    <h1>Ninka<br><span class="hero-title-ital">Leona</span></h1>
+    <p class="hero-subtitle">
+      Cantautora y facilitadora del despertar. Cada canción es una puerta hacia lo que eres realmente.
+    </p>
+
+    <div class="hero-actions">
+      <a href="https://open.spotify.com/artist/7vumHnlggf6TSzjCi0B8V8"
+         class="btn btn-primary" target="_blank">
+        Escuchar ahora
+      </a>
+      <a href="#despertar" class="btn btn-outline">Explorar</a>
+    </div>
+
+    <div class="player-wrap">
+      <div class="player-label">Player · Tú Sabes (2025)</div>
+      <div class="custom-player">
+        <iframe
+          style="border-radius:12px"
+          src="https://open.spotify.com/embed/track/0WWiWvHth7X3uA9p4y5Skw?utm_source=generator"
+          width="100%" height="152" frameBorder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="despertar">
+  <div class="section-header reveal">
+    <div class="section-tag">01 — filosofía</div>
+    <h2>El arte como<br>despertar</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="philosophy-grid">
+    <div class="philosophy-card reveal">
+      <span class="icon">🌙</span>
+      <h3>La música como puente</h3>
+      <p>No compono canciones, destilo memorias del alma. Cada pieza es un puente entre lo que olvidaste y lo que siempre fuiste.</p>
+    </div>
+
+    <div class="philosophy-card reveal">
+      <span class="icon">✨</span>
+      <h3>Palabra sagrada</h3>
+      <p>Las letras no son metáfora — son mapas. Cada verso te lleva más cerca de la verdad que ya llevas dentro pero no te atrevés a nombrar.</p>
+    </div>
+
+    <div class="philosophy-card reveal">
+      <span class="icon">🔮</span>
+      <h3>Polifonía interior</h3>
+      <p>Con más de 10 años de trayectoria, he aprendido que el canto verdadero no se hace con el cuerpo: se hace con la totalidad de lo que uno es.</p>
+    </div>
+
+    <div class="quote-large reveal">
+      <span class="quote-text">
+        «Despertar no es aprender algo nuevo —<br>
+        es recordar lo que tu alma siempre supo.<br>
+        Cuando suena "Tú Sabes", escucha con el pecho.»
+      </span>
+      <span class="quote-author">— Ninka Leona</span>
+    </div>
+  </div>
+</section>
+
+<section id="musica">
+  <div class="section-header reveal">
+    <div class="section-tag">02 — discografía</div>
+    <h2>Últimos<br>lanzamientos</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="tracks">
+    <div class="track-row reveal">
+      <div class="track-art">
+        <img src="https://i.scdn.co/image/ab67616d00001e02edf6ca1b2a76ca8794728d1d" alt="Tú Sabes" loading="lazy">
+      </div>
+      <div class="track-info">
+        <h4>Tú Sabes</h4>
+        <div class="meta">Single · 2025 · 4:59</div>
+      </div>
+      <a class="track-play" href="https://open.spotify.com/intl-es/track/0WWiWvHth7X3uA9p4y5Skw" target="_blank" aria-label="Reproducir Tú Sabes">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </a>
+    </div>
+
+    <div class="track-row reveal">
+      <div class="track-art">
+        <img src="https://i.scdn.co/image/ab67616d00001e02c1ac37e954185a6d96bdc74e" alt="Yo Me Tengo A Mi" loading="lazy">
+      </div>
+      <div class="track-info">
+        <h4>Yo Me Tengo A Mi</h4>
+        <div class="meta">Single · 2025 · 5:20</div>
+      </div>
+      <a class="track-play" href="https://open.spotify.com/track/69z4iAUG3rR3eVxTNirIrL" target="_blank" aria-label="Reproducir Yo Me Tengo A Mi">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="section-header reveal">
+    <div class="section-tag">03 — biografía</div>
+    <h2>La voz detrás<br>de la leona</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="about-layout">
+    <div class="about-image reveal">
+      <img src="https://i.scdn.co/image/ab67616d000011ebedf6ca1b2a76ca8794728d1d"
+           alt="Ninka Leona" loading="lazy">
+    </div>
+
+    <div class="about-content reveal">
+      <h3>«La música es la memoria del alma»</h3>
+      <p>Ninka es una artista cubana con más de 10 años de trayectoria musical. Compositora, cantante y creadora de experiencias que trascienden lo meramente auditivo.</p>
+      <p>Su trabajo navega entre la música popular y el arte sagrado, creando un puente único entre entretenimiento y consciencia.</p>
+      <p>Sus temas <em>Tú Sabes</em> y <em>Yo Me Tengo A Mi</em> (2025) son referentes de esta nueva voz que no pide permiso, que explora sin condimentos y que recuerda: antes de ser artista, es un ser humano despertando.</p>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="number">10+</span>
+          <span class="label">Años de carrera</span>
+        </div>
+        <div class="stat">
+          <span class="number">2</span>
+          <span class="label">Singles 2025</span>
+        </div>
+        <div class="stat">
+          <span class="number">∞</span>
+          <span class="label">Despertar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="conexion">
+  <div class="section-header reveal">
+    <div class="section-tag">04 — vínculos</div>
+    <h2>Conexión</h2>
+    <div class="section-line" style="margin: 2rem auto 0;"></div>
+  </div>
+
+  <p class="philosophy reveal" style="text-align:center; max-width:550px; margin:0 auto;">
+    Todas las redes son ventanas. El alma está detrás de cada una. Elegí la tuya:
+  </p>
+
+  <div class="social-grid">
+    <a class="social-card reveal" href="https://www.facebook.com/ninkaleona/" target="_blank">
+      <div class="social-icon">📘</div>
+      <h4>Facebook</h4>
+      <span class="handle">@ninka_leona</span>
+    </a>
+
+    <a class="social-card reveal" href="https://www.instagram.com/ninka_leona/" target="_blank">
+      <div class="social-icon">📸</div>
+      <h4>Instagram</h4>
+      <span class="handle">@ninka_leona</span>
+    </a>
+
+    <a class="social-card reveal" href="https://www.tiktok.com/@ninka.leona" target="_blank">
+      <div class="social-icon">🎬</div>
+      <h4>TikTok</h4>
+      <span class="handle">@ninka.leona</span>
+    </a>
+
+    <a class="social-card reveal" href="https://open.spotify.com/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank">
+      <div class="social-icon">🎵</div>
+      <h4>Spotify</h4>
+      <span class="handle">@ninka_leona</span>
+    </a>
+
+    <a class="social-card reveal" href="https://open.spotify.com/intl-es/track/0WWiWvHth7X3uA9p4y5Skw" target="_blank">
+      <div class="social-icon">🎧</div>
+      <h4>Track · Tú Sabes</h4>
+      <span class="handle">Single 2025</span>
+    </a>
+  </div>
+
+  <div class="final-cta reveal">
+    <h3>¿Querés que tu sitio tenga esta energía?</h3>
+    <p>Podemos llevar la experiencia Ninka Leona a otro nivel: reels visuales generados con IA, animaciones interactivas personalizadas y más.</p>
+    <a href="#conexion" class="btn btn-primary">Conversar</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">✦ Ninka Leona</div>
+  <div class="footer-links">
+    <a href="https://open.spotify.com/artist/7vumHnlggf6TSzjCi0B8V8">Spotify</a>
+    <a href="https://www.instagram.com/ninka_leona/">Instagram</a>
+    <a href="https://www.facebook.com/ninkaleona/">Facebook</a>
+    <a href="https://www.tiktok.com/@ninka.leona">TikTok</a>
+    <a href="https://open.spotify.com/intl-es/track/0WWiWvHth7X3uA9p4y5Skw">Escuchar</a>
+  </div>
+  <div class="copyright">© 2025 Ninka Leona · Música como despertar · Todos los derechos reservados</div>
+</footer>
+
+</div>
+
+<script>
+/* ─── COSMOS CANVAS ─── */
+(() => {
+  const c = document.getElementById('cosmos');
+  const ctx = c.getContext('2d');
+  let W, H;
+
+  const resize = () => {
+    W = c.width  = window.innerWidth;
+    H = c.height = window.innerHeight;
+  };
+  window.addEventListener('resize', resize);
+  resize();
+
+  const particles = [];
+  for (let i = 0; i < 220; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.2 + 0.3,
+      speed: Math.random() * 0.15 + 0.02,
+      opacity: Math.random(),
+      hue: Math.random() > 0.7 ? 42 : 270 // gold or purple tint
+    });
+  }
+
+  let t = 0;
+  const loop = () => {
+    t += 0.003;
+    ctx.clearRect(0, 0, W, H);
+
+    // subtle colored nebula drift
+    const gx = W * (0.5 + 0.3 * Math.sin(t * 0.4));
+    const gy = H * (0.5 + 0.2 * Math.cos(t * 0.3));
+    const rg = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(W,H) * 0.4);
+    rg.addColorStop(0, 'rgba(139,92,246,0.05)');
+    rg.addColorStop(0.5, 'rgba(99,102,241,0.02)');
+    rg.addColorStop(1, 'rgba(5,2,15,0)');
+    ctx.fillStyle = rg;
+    ctx.fillRect(0, 0, W, H);
+
+    particles.forEach(p => {
+      const tw = 0.5 + 0.5 * Math.abs(Math.sin(t * 3 + p.opacity * 7));
+      ctx.fillStyle = `rgba(232,224,240,${tw})`;
+      if (p.hue === 42) ctx.fillStyle = `rgba(243,215,126,${tw})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+      p.y -= p.speed;
+      if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; }
+    });
+
+    requestAnimationFrame(loop);
+  };
+  loop();
+})();
+
+/* ─── CURSOR GLOW ─── */
+(() => {
+  const glow = document.getElementById('cursor');
+  let mx = 0, my = 0;
+
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    glow.style.left  = mx + 'px';
+    glow.style.top   = my + 'px';
+  });
+
+  document.addEventListener('mouseleave', () => glow.style.opacity = '0');
+  document.addEventListener('mouseenter', () => glow.style.opacity = '1');
+})();
+
+/* ─── NAV SCROLL ─── */
+(() => {
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ─── SCROLL REVEAL ─── */
+(() => {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+
+</body>
+</html>

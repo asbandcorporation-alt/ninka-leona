@@ -3,603 +3,1167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ninka Leona | Encuentros con el Ser Uno</title>
+<title>Ninka Leona | Experiencias del Alma</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --fondo: #0c0914;
-    --oro: #dfb76c;
-    --lavanda: #e2d9f3;
-    --blanco: #fcfbf9;
-    --suave: #a9a4b8;
+    --bg: #07050d;
+    --bg-2: #0e0a18;
+    --gold: #d4a574;
+    --gold-bright: #f0c78e;
+    --lavender: #c8b6e2;
+    --white: #f5f3f7;
+    --muted: #9d95ad;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.06);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Montserrat', sans-serif;
-    background: var(--fondo);
-    color: var(--blanco);
-    line-height: 1.8;
-    letter-spacing: 0.5px;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    line-height: 1.7;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3 { font-family: 'Lora', serif; color: var(--oro); font-weight: 300; letter-spacing: 2px; }
-
-  #cosmos {
+  /* ── BACKGROUND SYSTEM ── */
+  .bg-canvas {
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
   }
 
+  .bg-mesh {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 15% 5%, rgba(212, 165, 116, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 20%, rgba(200, 182, 226, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(240, 199, 142, 0.04) 0%, transparent 50%);
+    animation: meshDrift 20s ease-in-out infinite;
+  }
+
+  @keyframes meshDrift {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+  }
+
+  .bg-noise {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.025;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
   .stage { position: relative; z-index: 2; }
 
+  /* ── NAV ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 500;
-    padding: 1.2rem 1.5rem;
-    background: rgba(12,9,20,0.7);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(223,183,108,0.08);
+    padding: 1.2rem 1.8rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 0.8rem;
+    background: rgba(7, 5, 13, 0.75);
+    backdrop-filter: blur(20px) saturate(120%);
+    border-bottom: 1px solid rgba(212, 165, 116, 0.08);
+    transition: transform 0.4s ease;
   }
+
+  nav.hidden { transform: translateY(-100%); }
 
   .logo {
-    font-family: 'Lora', serif;
-    font-size: 1rem;
-    letter-spacing: 0.3em;
-    color: var(--oro);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    color: var(--gold);
     text-transform: uppercase;
+    text-decoration: none;
   }
 
-  .nav-socials { display: flex; gap: 2rem; }
+  .nav-links {
+    display: flex;
+    gap: 1.8rem;
+    align-items: center;
+  }
 
-  .nav-links { display: flex; gap: 1.2rem; }
-
-  .btn-nav {
-    color: var(--suave);
+  .nav-link {
+    color: var(--muted);
     text-decoration: none;
     font-size: 0.72rem;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
     transition: color 0.3s;
   }
-  .btn-nav:hover { color: var(--oro); }
 
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover { color: var(--gold); }
+  .nav-link:hover::after { width: 100%; }
+
+  /* ── HERO ── */
   header {
     min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 8rem 3rem 5rem;
+    max-width: 1500px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-visual {
+    position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 7rem 1.5rem 4rem;
+    perspective: 800px;
   }
 
-  .hero-img {
-    width: min(280px, 75vw);
+  .hero-frame {
+    position: relative;
+    width: min(420px, 85vw);
     aspect-ratio: 3/4;
-    border-radius: 50%;
+    border-radius: 220px 220px 50px 50px;
     overflow: hidden;
-    margin-bottom: 2.5rem;
-    border: 1px solid rgba(223,183,108,0.25);
-    box-shadow: 0 0 80px rgba(223,183,108,0.15), 0 0 40px rgba(142,68,173,0.2);
-    animation: float 8s ease-in-out infinite;
-  }
-
-  .hero-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: saturate(0.85) contrast(1.05);
+    border: 1px solid rgba(212, 165, 116, 0.25);
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.5),
+      0 0 100px rgba(212, 165, 116, 0.2),
+      inset 0 0 60px rgba(240, 199, 142, 0.05);
+    animation: float 7s ease-in-out infinite, shimmer 5s linear infinite;
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-14px); }
+    0%, 100% { transform: translateY(0) rotateX(0); }
+    50% { transform: translateY(-18px) rotateX(2deg); }
   }
 
-  .simbolo {
-    font-size: 1.6rem;
-    color: var(--oro);
-    opacity: 0.7;
-    margin-bottom: 1.2rem;
+  @keyframes shimmer {
+    0% { border-color: rgba(212, 165, 116, 0.25); }
+    50% { border-color: rgba(240, 199, 142, 0.45); }
+    100% { border-color: rgba(212, 165, 116, 0.25); }
+  }
+
+  .hero-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.9) contrast(1.05);
+    mix-blend-mode: normal;
+  }
+
+  .hero-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(7, 5, 13, 0.4) 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-orb {
+    position: absolute;
+    top: 8%;
+    right: -15%;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(240, 199, 142, 0.25), transparent 70%);
+    filter: blur(25px);
+    animation: orbPulse 4s ease-in-out infinite;
+  }
+
+  @keyframes orbPulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.3); opacity: 1; }
+  }
+
+  .hero-content { max-width: 540px; }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
   }
 
   h1 {
-    font-size: clamp(2.2rem, 6vw, 3.4rem);
-    text-shadow: 0 0 30px rgba(223,183,108,0.2);
-    margin-bottom: 1rem;
-    padding: 0 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    line-height: 1.02;
+    color: var(--white);
+    margin-bottom: 2rem;
   }
 
-  header > p {
-    font-family: 'Lora', serif;
+  h1 em {
     font-style: italic;
-    font-size: 1.1rem;
-    color: var(--lavanda);
-    max-width: 600px;
-    margin: 0 auto 2.5rem;
-    padding: 0 1rem;
+    color: var(--gold-bright);
+    display: block;
+    font-size: 1.05em;
+    margin-top: 0.3rem;
   }
 
-  .btn-mistico {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: var(--oro);
+  .hero-subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 3.5rem;
+    line-height: 1.9;
+    max-width: 460px;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    padding: 1.1rem 2.4rem;
+    border-radius: 60px;
     text-decoration: none;
-    padding: 1rem 2.2rem;
-    border: 1px solid rgba(223,183,108,0.4);
-    border-radius: 50px;
-    transition: all 0.5s ease;
-    background: transparent;
-    font-size: 0.8rem;
-    display: inline-block;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
   }
 
-  .btn-mistico:hover {
-    background-color: var(--oro);
-    color: var(--fondo);
-    box-shadow: 0 0 30px rgba(223,183,108,0.5);
-    border-color: var(--oro);
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), #b8884d);
+    color: var(--bg);
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 10px 35px rgba(212, 165, 116, 0.3);
   }
 
-  section { padding: 5rem 1.5rem; }
-  .contenedor { max-width: 900px; margin: 0 auto; }
+  .btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 45px rgba(212, 165, 116, 0.5);
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  }
 
-  .separador {
+  .btn-ghost {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(212, 165, 116, 0.5);
+    color: var(--gold-bright);
+    transform: translateY(-4px);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 7rem 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .section-header {
     text-align: center;
-    margin: 3rem 0;
-    color: rgba(223,183,108,0.25);
-    font-size: 1.3rem;
-    letter-spacing: 0.6em;
+    margin-bottom: 5rem;
   }
 
-  .sobre-mi { text-align: center; }
-  .sobre-mi h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 1.5rem; }
-  .sobre-mi p {
-    color: var(--suave);
-    font-size: 1rem;
-    max-width: 700px;
-    margin: 0 auto 1.2rem;
+  .section-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.55em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
   }
 
-  #musica {
-    background: linear-gradient(180deg, transparent, rgba(142,68,173,0.06), transparent);
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    line-height: 1.15;
   }
 
-  .musica-grid {
+  h2 em { font-style: italic; color: var(--gold-bright); }
+
+  .section-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 2.5rem auto 0;
+  }
+
+  /* ── MUSIC ── */
+  .music-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-top: 3rem;
-  }
-
-  @media (min-width: 768px) {
-    .musica-grid { grid-template-columns: 1fr 1fr; }
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
   }
 
   .track-card {
-    padding: 1.8rem;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(169,164,184,0.15);
-    border-radius: 20px;
-    transition: all 0.4s ease;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    overflow: hidden;
     text-decoration: none;
     color: inherit;
     display: block;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(20px);
+    position: relative;
   }
 
   .track-card:hover {
-    border-color: rgba(223,183,108,0.4);
-    background: rgba(255,255,255,0.04);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(212, 165, 116, 0.4);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(212, 165, 116, 0.15);
   }
 
+  .track-card::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.3), transparent, rgba(240, 199, 142, 0.2));
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -1;
+  }
+
+  .track-card:hover::after { opacity: 1; }
+
   .track-art {
-    width: 100%;
     aspect-ratio: 1;
-    border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 1.2rem;
-    background: rgba(223,183,108,0.08);
+    position: relative;
   }
 
   .track-art img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: saturate(0.8);
+    transition: transform 0.6s ease;
   }
 
-  .track-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+  .track-card:hover .track-art img { transform: scale(1.08); }
+
+  .track-body {
+    padding: 2rem;
+    position: relative;
+  }
+
+  .track-body h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+  }
 
   .track-meta {
-    color: var(--suave);
-    font-size: 0.8rem;
+    color: var(--muted);
+    font-size: 0.85rem;
     letter-spacing: 0.1em;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
-  .track-play {
+  .track-cta {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.6rem 1.2rem;
-    background: rgba(223,183,108,0.12);
-    border: 1px solid rgba(223,183,108,0.3);
-    border-radius: 25px;
-    color: var(--oro);
+    gap: 0.8rem;
+    padding: 0.75rem 1.4rem;
+    background: rgba(212, 165, 116, 0.12);
+    border: 1px solid rgba(212, 165, 116, 0.35);
+    border-radius: 30px;
+    color: var(--gold-bright);
     font-size: 0.75rem;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    font-weight: 500;
     transition: all 0.3s ease;
   }
 
-  .track-card:hover .track-play {
-    background: rgba(223,183,108,0.2);
-    border-color: var(--oro);
+  .track-card:hover .track-cta {
+    background: rgba(212, 165, 116, 0.22);
+    border-color: var(--gold);
+    box-shadow: 0 0 30px rgba(212, 165, 116, 0.3);
   }
 
-  .encuentros { margin-top: 3rem; }
-  .encuentros h2, .contacto h2 {
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    margin-bottom: 2.5rem;
-    text-align: center;
+  .track-cta .arrow {
+    transition: transform 0.3s ease;
+    font-size: 1.1rem;
   }
 
-  .grid-encuentros {
+  .track-card:hover .track-cta .arrow { transform: translateX(4px); }
+
+  /* ── ESSENCE ── */
+  #esencia {
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(200, 182, 226, 0.04) 50%, transparent 100%);
+  }
+
+  .essence-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .essence-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 180px 180px 30px 30px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 165, 116, 0.3);
+    box-shadow: 0 40px 100px rgba(7, 5, 13, 0.6);
+  }
+
+  .essence-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.8) contrast(1.05);
+  }
+
+  .essence-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(7, 5, 13, 0.5) 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .essence-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-bright);
+    margin-bottom: 2rem;
+    line-height: 1.3;
+  }
+
+  .essence-content p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 1.6rem;
+    line-height: 2;
+    font-weight: 300;
+  }
+
+  /* ── ENCOUNTERS ── */
+  .encounters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.8rem;
+    margin-top: 4rem;
   }
 
-  @media (min-width: 640px) {
-    .grid-encuentros { grid-template-columns: 1fr 1fr; }
+  .encounter-card {
+    padding: 3rem 2.4rem;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 26px;
+    backdrop-filter: blur(20px);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
   }
 
-  .carta-encuentro {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(169,164,184,0.12);
-    padding: 2rem;
-    border-radius: 16px;
-    transition: all 0.4s ease;
+  .encounter-card::before {
+    content: '';
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(circle, rgba(240, 199, 142, 0.25), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
   }
 
-  .carta-encuentro:hover {
-    border-color: rgba(223,183,108,0.35);
-    background: rgba(255,255,255,0.04);
-    transform: translateY(-4px);
+  .encounter-card:hover::before { opacity: 1; }
+
+  .encounter-card:hover {
+    border-color: rgba(212, 165, 116, 0.4);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 40px 70px rgba(7, 5, 13, 0.6), 0 0 50px rgba(212, 165, 116, 0.12);
   }
 
-  .carta-encuentro h3 { font-size: 1.15rem; margin-bottom: 0.8rem; }
-  .carta-encuentro p { color: var(--suave); font-size: 0.9rem; line-height: 1.75; }
-
-  #redes {
-    background: linear-gradient(180deg, transparent, rgba(223,183,108,0.04), transparent);
+  .encounter-icon {
+    width: 68px;
+    height: 68px;
+    margin-bottom: 1.8rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.2), rgba(200, 182, 226, 0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
   }
 
-  .redes-grid {
+  .encounter-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.2;
+  }
+
+  .encounter-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-weight: 400;
+    position: relative;
+  }
+
+  .encounter-card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.85;
+    position: relative;
+  }
+
+  /* ── CONNECTION ── */
+  #conexion {
+    background:
+      linear-gradient(180deg, transparent, rgba(212, 165, 116, 0.04), transparent);
+  }
+
+  .connection-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
     gap: 1.2rem;
-    margin-top: 3rem;
+    margin-top: 4rem;
   }
 
-  .red-card {
-    padding: 1.5rem 1rem;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(169,164,184,0.12);
-    border-radius: 16px;
+  .social-card {
+    padding: 2.5rem 1.5rem;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 22px;
     text-align: center;
     text-decoration: none;
-    color: var(--blanco);
+    color: var(--white);
     transition: all 0.4s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1rem;
+    backdrop-filter: blur(20px);
   }
 
-  .red-card:hover {
-    border-color: var(--oro);
-    background: rgba(223,183,108,0.08);
-    transform: translateY(-4px);
+  .social-card:hover {
+    border-color: var(--gold);
+    background: rgba(212, 165, 116, 0.08);
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 25px 60px rgba(7, 5, 13, 0.5), 0 0 40px rgba(212, 165, 116, 0.15);
   }
 
-  .red-icon { font-size: 2rem; line-height: 1; }
+  .social-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.25), rgba(200, 182, 226, 0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+  }
 
-  .red-title {
-    font-family: 'Montserrat', sans-serif;
+  .social-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
     font-weight: 500;
-    font-size: 0.9rem;
+  }
+
+  .social-handle {
+    color: var(--muted);
+    font-size: 0.8rem;
     letter-spacing: 0.1em;
   }
 
-  .red-handle {
-    color: var(--suave);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-  }
+  /* ── CTA FINAL ── */
+  #contacto { text-align: center; }
 
-  .contacto {
+  .final-cta {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 3rem;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    backdrop-filter: blur(25px);
     text-align: center;
-    padding: 5rem 1.5rem;
-    background: linear-gradient(to bottom, transparent, rgba(12,9,20,0.7));
+    position: relative;
+    overflow: hidden;
   }
 
-  .contacto > p {
-    color: var(--lavanda);
-    font-family: 'Lora', serif;
-    font-style: italic;
-    margin-bottom: 2rem;
-    font-size: 1rem;
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    top: -80%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(212, 165, 116, 0.2), transparent 60%);
+    animation: ctaGlow 8s ease-in-out infinite;
   }
 
-  .contacto-actions {
+  @keyframes ctaGlow {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(10%, 10%); }
+  }
+
+  .final-cta h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--gold-bright);
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+
+  .final-cta h3 em { font-style: italic; display: block; font-size: 0.8em; color: var(--gold); }
+
+  .final-cta > p {
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    position: relative;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+
+  .cta-actions {
     display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 2rem;
+    position: relative;
   }
 
-  .whatsapp-float {
+  .btn-copper {
+    background: linear-gradient(135deg, var(--gold), #a8763e);
+    color: var(--bg);
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 12px 35px rgba(212, 165, 116, 0.4);
+  }
+
+  .btn-copper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 45px rgba(212, 165, 116, 0.6);
+  }
+
+  .btn-whatsapp {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    border: none;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
+  }
+
+  .btn-whatsapp:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 45px rgba(37, 211, 102, 0.55);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 4rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(212, 165, 116, 0.1);
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-socials a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-socials a:hover { color: var(--gold-bright); }
+
+  .copyright {
+    font-size: 0.72rem;
+    color: var(--muted);
+    opacity: 0.6;
+    letter-spacing: 0.2em;
+  }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float {
     position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
+    bottom: 2rem;
+    right: 2rem;
     z-index: 600;
-    width: 60px;
-    height: 60px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    background: #25d366;
+    background: linear-gradient(135deg, #25d366, #128c7e);
     color: white;
     font-size: 1.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    box-shadow: 0 6px 20px rgba(37,211,102,0.5);
-    transition: transform 0.3s ease;
+    box-shadow: 0 10px 35px rgba(37, 211, 102, 0.5), 0 0 60px rgba(37, 211, 102, 0.3);
+    transition: all 0.4s ease;
     border: none;
+    animation: pulseWA 3s ease-in-out infinite;
   }
 
-  .whatsapp-float:hover { transform: scale(1.1); }
-
-  footer {
-    text-align: center;
-    padding: 2.5rem 1.5rem;
-    color: rgba(169,164,184,0.5);
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
+  @keyframes pulseWA {
+    0%, 100% { box-shadow: 0 10px 35px rgba(37, 211, 102, 0.5), 0 0 60px rgba(37, 211, 102, 0.3); }
+    50% { box-shadow: 0 14px 45px rgba(37, 211, 102, 0.7), 0 0 80px rgba(37, 211, 102, 0.5); }
   }
 
-  @media (min-width: 768px) {
-    nav { padding: 1.4rem 3rem; }
-    .hero-img { width: 340px; }
-    section { padding: 6rem 2rem; }
+  .wa-float:hover { transform: scale(1.15) rotate(8deg); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(212, 165, 116, 0.25);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    header {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: 6rem 1.5rem 3rem;
+      gap: 3rem;
+    }
+
+    .hero-content { max-width: 100%; }
+    .hero-actions { justify-content: center; }
+    .hero-subtitle { margin: 0 auto 2rem; }
+    .hero-frame { width: min(280px, 70vw); }
+
+    .essence-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .essence-visual { max-width: 260px; margin: 0 auto; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hero-frame { width: 220px; }
+    section { padding: 5rem 1.2rem; }
+    .final-cta { padding: 3rem 1.5rem; }
+    .final-cta h3 { font-size: 2.2rem; }
+    h1 { font-size: 2.4rem; }
+    header { padding-top: 5.5rem; }
+    .btn { padding: 0.9rem 1.8rem; font-size: 0.72rem; }
+    .wa-float { width: 55px; height: 55px; bottom: 1.2rem; right: 1.2rem; }
   }
 </style>
 </head>
 <body>
 
-<canvas id="cosmos"></canvas>
+<canvas class="bg-canvas" id="cosmos"></canvas>
+<div class="bg-mesh"></div>
+<div class="bg-noise"></div>
 
 <div class="stage">
 
-<nav>
-  <div class="logo">Ninka Leona</div>
+<nav id="nav">
+  <a href="#" class="logo">Ninka Leona</a>
   <div class="nav-links">
-    <a class="btn-nav" href="#musica">Música</a>
-    <a class="btn-nav" href="#encuentros">Encuentros</a>
-  </div>
-  <div class="nav-socials">
-    <a class="btn-nav" href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" target="_blank" rel="noopener">WhatsApp</a>
-    <a class="btn-nav" href="https://open.spotify.com/intl-es/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener">Spotify</a>
+    <a href="#musica" class="nav-link">Música</a>
+    <a href="#esencia" class="nav-link">Esencia</a>
+    <a href="#encuentros" class="nav-link">Encuentros</a>
+    <a href="#conexion" class="nav-link">Conexión</a>
+    <a href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" class="nav-link" target="_blank" rel="noopener">WhatsApp</a>
   </div>
 </nav>
 
 <header>
-  <div class="hero-img">
-    <img src="hero.jpg" alt="Ninka Leona" loading="eager">
+  <div class="hero-visual reveal">
+    <div class="hero-frame">
+      <img src="hero.jpg" alt="Ninka Leona" loading="eager">
+    </div>
+    <div class="hero-orb"></div>
   </div>
-  <div class="simbolo">✧</div>
-  <h1>Ninka Leona</h1>
-  <p>Espacio dimensional para recordar tu divinidad, sanar el plano físico y fundirte en el Ser Uno.</p>
-  <a href="#musica" class="btn-mistico">Escuchar y Elegir</a>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal">Experiencias del Alma</div>
+    <h1 class="reveal reveal-delay-1">
+      Ninka Leona
+      <em>Tu camino de recordar</em>
+    </h1>
+    <p class="hero-subtitle reveal reveal-delay-2">
+      Acompañamiento personalizado para reconectar con tu esencia, soltar el ruido mental y alinear cada decisión con lo que realmente querés ser.
+    </p>
+    <div class="hero-actions reveal reveal-delay-3">
+      <a href="https://wa.me/527772192422?text=Hola%20Ninka,%20siento%20el%20llamado" class="btn btn-primary" target="_blank" rel="noopener">
+        Iniciar el Viaje
+      </a>
+      <a href="#esencia" class="btn btn-ghost">Conocer Más</a>
+    </div>
+  </div>
 </header>
 
-<div class="separador">✦ ✦ ✦</div>
+<div style="height: 1px; max-width: 1300px; margin: 0 auto; background: linear-gradient(90deg, transparent, rgba(212,165,116,0.3), transparent);"></div>
 
-<section class="contenedor" id="musica">
-  <div style="text-align:center;">
-    <div style="color:var(--oro); font-size:0.75rem; letter-spacing:0.4em; text-transform:uppercase; margin-bottom:1rem;">Música</div>
-    <h2>Mis Canciones</h2>
-    <p style="color:var(--lavanda); font-family:'Lora',serif; font-style:italic; max-width:500px; margin:0 auto 2rem;">
-      Cada canción es una frecuencia para el alma. Escucha y siente.
-    </p>
+<section id="musica">
+  <div class="section-header reveal">
+    <div class="section-tag">Escucha</div>
+    <h2>Frecuencias para <em>tu alma</em></h2>
+    <div class="section-line"></div>
   </div>
 
-  <div class="musica-grid">
-    <a class="track-card" href="https://open.spotify.com/intl-es/track/0WWiWvHth7X3uA9p4y5Skw" target="_blank" rel="noopener">
+  <div class="music-grid">
+    <a class="track-card reveal reveal-delay-1" href="https://open.spotify.com/intl-es/track/0WWiWvHth7X3uA9p4y5Skw" target="_blank" rel="noopener">
       <div class="track-art">
         <img src="https://i.scdn.co/image/ab67616d00001e02edf6ca1b2a76ca8794728d1d" alt="Tú Sabes" loading="lazy">
       </div>
-      <h3>Tú Sabes</h3>
-      <div class="track-meta">Single · 2025 · 4:59</div>
-      <span class="track-play">▶ Escuchar en Spotify</span>
+      <div class="track-body">
+        <h3>Tú Sabes</h3>
+        <div class="track-meta">Single · 4:59</div>
+        <span class="track-cta">
+          <span>▶ Escuchar</span>
+          <span class="arrow">→</span>
+        </span>
+      </div>
     </a>
 
-    <a class="track-card" href="https://open.spotify.com/track/69z4iAUG3rR3eVxTNirIrL" target="_blank" rel="noopener">
+    <a class="track-card reveal reveal-delay-2" href="https://open.spotify.com/track/69z4iAUG3rR3eVxTNirIrL" target="_blank" rel="noopener">
       <div class="track-art">
         <img src="https://i.scdn.co/image/ab67616d00001e02c1ac37e954185a6d96bdc74e" alt="Yo Me Tengo A Mi" loading="lazy">
       </div>
-      <h3>Yo Me Tengo A Mi</h3>
-      <div class="track-meta">Single · 2025 · 5:20</div>
-      <span class="track-play">▶ Escuchar en Spotify</span>
+      <div class="track-body">
+        <h3>Yo Me Tengo A Mi</h3>
+        <div class="track-meta">Single · 5:20</div>
+        <span class="track-cta">
+          <span>▶ Escuchar</span>
+          <span class="arrow">→</span>
+        </span>
+      </div>
     </a>
   </div>
 
-  <div style="text-align:center; margin-top:2.5rem;">
-    <a href="https://open.spotify.com/intl-es/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener" class="btn-mistico" style="font-size:0.75rem; padding:0.8rem 1.8rem;">
+  <div style="text-align:center; margin-top:3.5rem;" class="reveal">
+    <a href="https://open.spotify.com/intl-es/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener" class="btn btn-ghost">
       Ver todo en Spotify
     </a>
   </div>
 </section>
 
-<div class="separador">✦ ✦ ✦</div>
-
-<section class="contenedor" id="sobre-mi">
-  <h2>La Esencia detrás del Silencio</h2>
-  <p>No soy un maestro, soy un espejo. Un puente fractal diseñado para reflejar la luz que ya habita en ti. Inspirado por la corriente cósmica de Ramtha, el vacío transformador de Osho y la verdad eterna de El Ser Uno, mi propósito es acompañarte a desmantelar la ilusión de la separación.</p>
-  <p>Aquí no venimos a aprender nada nuevo; venimos a recordar lo que tu alma ya sabe desde el origen de los tiempos.</p>
-</section>
-
-<div class="separador">✦ ✦ ✦</div>
-
-<section class="contenedor encuentros" id="encuentros">
-  <h2>Encuentros Personalizados</h2>
-  <div class="grid-encuentros">
-    <div class="carta-encuentro">
-      <h3>01. El Despertar del Observador</h3>
-      <p>Sesiones individuales donde aprendemos a separarnos de la matriz del ego. Basado en las enseñanzas de Ramtha, activarás el poder de tu conciencia para colapsar nuevas realidades y sanar el cuerpo material.</p>
+<section id="esencia">
+  <div class="essence-grid">
+    <div class="essence-visual reveal">
+      <img src="hero.jpg" alt="Ninka Leona" loading="lazy">
     </div>
-    <div class="carta-encuentro">
-      <h3>02. Sintonía con el Ser Uno</h3>
-      <p>Alineación energética y diálogos profundos para comprender las leyes de los planos superiores. Un mapa de navegación espiritual para las almas que buscan trascender la dualidad de la tercera dimensión.</p>
-    </div>
-    <div class="carta-encuentro">
-      <h3>03. El Vacío Creador (Estilo Osho)</h3>
-      <p>Pláticas y meditaciones dinámicas enfocadas en destruir las programaciones mentales que te atan al pasado. Encontrar la paz absoluta en medio del caos del mundo moderno a través de la aceptación radical.</p>
-    </div>
-    <div class="carta-encuentro">
-      <h3>04. Sanación del Linaje Cósmico</h3>
-      <p>Espacios íntimos dedicados a liberar bloqueos energéticos, miedos heredados y nudos del alma que impiden el flujo de tu energía vital superior.</p>
+    <div class="essence-content reveal reveal-delay-2">
+      <h3>«La música es la memoria del alma»</h3>
+      <p>Mi camino no ha sido lineal. Desperté entendiendo que mi voz —y mi presencia— eran instrumentos de sanación. Más de una década de música me enseñó a escuchar lo que yace debajo del ruido: la verdad que todos llevamos dentro.</p>
+      <p>Hoy fusiono arte y acompañamiento humano para crear espacios donde el alma recuerda, el cuerpo se libera y el corazón se abre. No enseño nada que no sepas ya: solo ayudo a que lo recuerdes.</p>
+      <p>Cada encuentro es un viaje de regreso a ti. Sin máscaras, sin prisa, sin juicios. Solo tu verdad, en un espacio seguro para renacer.</p>
     </div>
   </div>
 </section>
 
-<div class="separador">✦ ✦ ✦</div>
+<section id="encuentros">
+  <div class="section-header reveal">
+    <div class="section-tag">Experiencias</div>
+    <h2>Cuatro caminos de <em>sanación</em></h2>
+    <div class="section-line"></div>
+  </div>
 
-<section class="contenedor" id="redes">
-  <div style="text-align:center;">
-    <h2>Conexión</h2>
-    <p style="color:var(--lavanda); font-family:'Lora',serif; font-style:italic; max-width:500px; margin:0 auto 2rem;">
-      Todas las redes son puentes. El alma está detrás de cada una.
+  <div class="encounters-grid">
+    <div class="encounter-card reveal reveal-delay-1">
+      <div class="encounter-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+      </div>
+      <h3>El Despertar del Observador</h3>
+      <p>Sesiones individuales para observarte más allá del ruido mental. Activarás tu propia conciencia para generar cambios reales y soltar lo que ya no te pertenece.</p>
+    </div>
+
+    <div class="encounter-card reveal reveal-delay-2">
+      <div class="encounter-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v12M6 12h12" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Conexión con tu Esencia</h3>
+      <p>Alineación profunda desde la intuición. Un espacio de escucha interna para reconocer lo que realmente querés y animarte a soltar el control.</p>
+    </div>
+
+    <div class="encounter-card reveal reveal-delay-3">
+      <div class="encounter-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10"/><path d="M22 12c0-5.52-4.48-10-10-10"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <h3>El Vacío Creador</h3>
+      <p>Reflexión y apertura para desactivar hábitos mentales que te repiten el pasado. Practicar la aceptación y recuperar calma en cualquier circunstancia.</p>
+    </div>
+
+    <div class="encounter-card reveal reveal-delay-4">
+      <div class="encounter-icon">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <h3>Sanación del Linaje</h3>
+      <p>Espacios íntimos para liberar bloqueos, miedos heredados y nudos del alma que impiden el flujo de tu energía y tu bienestar.</p>
+    </div>
+  </div>
+</section>
+
+<section id="conexion">
+  <div class="section-header reveal">
+    <div class="section-tag">Conexión</div>
+    <h2>Todas las redes son <em>puentes</em></h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="connection-grid">
+    <a class="social-card reveal" href="https://open.spotify.com/intl-es/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener">
+      <span class="social-icon">🎵</span>
+      <span class="social-label">Spotify</span>
+      <span class="social-handle">Escuchar ahora</span>
+    </a>
+    <a class="social-card reveal reveal-delay-1" href="https://www.instagram.com/ninka_leona/" target="_blank" rel="noopener">
+      <span class="social-icon">📸</span>
+      <span class="social-label">Instagram</span>
+      <span class="social-handle">@ninka_leona</span>
+    </a>
+    <a class="social-card reveal reveal-delay-2" href="https://www.facebook.com/ninkaleona/" target="_blank" rel="noopener">
+      <span class="social-icon">📘</span>
+      <span class="social-label">Facebook</span>
+      <span class="social-handle">Ninka Leona</span>
+    </a>
+    <a class="social-card reveal reveal-delay-3" href="https://www.tiktok.com/@ninka.leona" target="_blank" rel="noopener">
+      <span class="social-icon">🎬</span>
+      <span class="social-label">TikTok</span>
+      <span class="social-handle">@ninka.leona</span>
+    </a>
+    <a class="social-card reveal reveal-delay-4" href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" target="_blank" rel="noopener">
+      <span class="social-icon">💬</span>
+      <span class="social-label">WhatsApp</span>
+      <span class="social-handle">777 219 2422</span>
+    </a>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="final-cta reveal">
+    <div class="section-tag">Contacto</div>
+    <h3>Reserva tu <em>espacio en el tiempo</em></h3>
+    <p>
+      Cuando el discípulo está listo, el mensaje aparece. Escribime y conversamos cómo puedo ayudarte.
     </p>
-  </div>
-
-  <div class="redes-grid">
-    <a class="red-card" href="https://open.spotify.com/intl-es/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener">
-      <span class="red-icon">🎵</span>
-      <div class="red-title">Spotify</div>
-      <div class="red-handle"> Escuchar</div>
-    </a>
-    <a class="red-card" href="https://www.instagram.com/ninka_leona/" target="_blank" rel="noopener">
-      <span class="red-icon">📸</span>
-      <div class="red-title">Instagram</div>
-      <div class="red-handle">@ninka_leona</div>
-    </a>
-    <a class="red-card" href="https://www.facebook.com/ninkaleona/" target="_blank" rel="noopener">
-      <span class="red-icon">📘</span>
-      <div class="red-title">Facebook</div>
-      <div class="red-handle">Ninka Leona</div>
-    </a>
-    <a class="red-card" href="https://www.tiktok.com/@ninka.leona" target="_blank" rel="noopener">
-      <span class="red-icon">🎬</span>
-      <div class="red-title">TikTok</div>
-      <div class="red-handle">@ninka.leona</div>
-    </a>
-    <a class="red-card" href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" target="_blank" rel="noopener">
-      <span class="red-icon">💬</span>
-      <div class="red-title">WhatsApp</div>
-      <div class="red-handle">777 219 2422</div>
-    </a>
-  </div>
-</section>
-
-<div class="separador">✦ ✦ ✦</div>
-
-<section class="contacto" id="contacto">
-  <h2>¿Sientes el llamado?</h2>
-  <p>"Cuando el discípulo está listo, el mensaje aparece."</p>
-  <div class="contacto-actions">
-    <a href="mailto:nkleona@afun.mx?subject=Quiero%20reservar%20un%20espacio%20en%20el%20tiempo" class="btn-mistico">Reservar por Correo</a>
-    <a href="https://wa.me/527772192422?text=Hola%20Ninka,%20siento%20el%20llamado" class="btn-mistico" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    <div class="cta-actions">
+      <a href="mailto:nkleona@afun.mx?subject=Quiero%20reservar%20un%20espacio%20en%20el%20tiempo" class="btn btn-copper">
+        ✦ Correo
+      </a>
+      <a href="https://wa.me/527772192422?text=Hola%20Ninka,%20siento%20el%20llamado" class="btn btn-whatsapp" target="_blank" rel="noopener">
+        ✦ Escribir por WhatsApp
+      </a>
+    </div>
   </div>
 </section>
 
 <footer>
-  <p>Ninka Leona · 2026</p>
+  <div class="footer-logo">✦ Ninka Leona</div>
+  <div class="footer-socials">
+    <a href="https://open.spotify.com/intl-es/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener">Spotify</a>
+    <a href="https://www.instagram.com/ninka_leona/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/ninkaleona/" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://www.tiktok.com/@ninka.leona" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <div class="copyright">© 2025 Ninka Leona · Todos los derechos reservados</div>
 </footer>
 
-<a class="whatsapp-float" href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" target="_blank" rel="noopener" aria-label="WhatsApp">
-  💬
-</a>
+<a class="wa-float" href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
 
 </div>
 
 <script>
 (() => {
+  /* ── INTERSECTION OBSERVER ── */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── COSMOS CANVAS ── */
   const c = document.getElementById('cosmos');
   const ctx = c.getContext('2d');
   let W, H;
-
-  const resize = () => {
-    W = c.width = window.innerWidth;
-    H = c.height = window.innerHeight;
-  };
+  const resize = () => { W = c.width = window.innerWidth; H = c.height = window.innerHeight; };
   window.addEventListener('resize', resize);
   resize();
 
-  const stars = Array.from({ length: 160 }, () => ({
+  const particles = Array.from({ length: 200 }, () => ({
     x: Math.random() * window.innerWidth,
     y: Math.random() * window.innerHeight,
-    r: Math.random() * 1.4 + 0.4,
-    speed: Math.random() * 0.25 + 0.05,
-    base: Math.random(),
-    golden: Math.random() > 0.75
+    r: Math.random() * 1.8 + 0.3,
+    speed: Math.random() * 0.35 + 0.05,
+    phase: Math.random() * Math.PI * 2,
+    golden: Math.random() > 0.7
+  }));
+
+  const connections = Array.from({ length: 30 }, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    size: Math.random() * 2 + 1,
+    speed: Math.random() * 0.15 + 0.02,
+    opacity: Math.random() * 0.4 + 0.1
   }));
 
   let t = 0;
   const loop = () => {
-    t += 0.002;
+    t += 0.003;
     ctx.clearRect(0, 0, W, H);
 
-    const gx = W * 0.5 + Math.sin(t * 0.3) * W * 0.2;
-    const gy = H * 0.35 + Math.cos(t * 0.2) * H * 0.2;
-    const rg = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(W, H) * 0.4);
-    rg.addColorStop(0, 'rgba(223,183,108,0.04)');
-    rg.addColorStop(1, 'rgba(12,9,20,0)');
+    // Glow central dinámico
+    const gx = W * 0.5 + Math.sin(t * 0.4) * W * 0.25;
+    const gy = H * 0.3 + Math.cos(t * 0.3) * H * 0.2;
+    const rg = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(W, H) * 0.35);
+    rg.addColorStop(0, 'rgba(212,165,116,0.05)');
+    rg.addColorStop(0.5, 'rgba(200,182,226,0.03)');
+    rg.addColorStop(1, 'rgba(7,5,13,0)');
     ctx.fillStyle = rg;
     ctx.fillRect(0, 0, W, H);
 
-    stars.forEach(s => {
-      const tw = 0.5 + 0.5 * Math.abs(Math.sin(t * 2 + s.base * 10));
-      ctx.fillStyle = s.golden ? `rgba(223,183,108,${tw})` : `rgba(226,217,243,${tw * 0.6})`;
+    // Partículas
+    particles.forEach(p => {
+      const alpha = 0.5 + 0.5 * Math.sin(t + p.phase);
+      ctx.fillStyle = p.golden ? `rgba(240,199,142,${alpha})` : `rgba(200,182,226,${alpha * 0.6})`;
       ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fill();
-      s.y -= s.speed;
-      if (s.y < -5) { s.y = H + 5; s.x = Math.random() * W; }
+      p.y -= p.speed;
+      if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; }
+    });
+
+    // Líneas sutiles
+    connections.forEach(c => {
+      ctx.strokeStyle = `rgba(212,165,116,${c.opacity})`;
+      ctx.lineWidth = c.size;
+      ctx.beginPath();
+      ctx.moveTo(c.x, c.y);
+      c.y -= c.speed;
+      if (c.y < -10) {
+        c.y = H + 10;
+        c.x = Math.random() * W;
+      }
+      ctx.lineTo(c.x, c.y + 80);
+      ctx.stroke();
     });
 
     requestAnimationFrame(loop);
   };
   loop();
+
+  /* ── NAV HIDE ON SCROLL ── */
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('nav');
+    const y = window.scrollY;
+    if (y > 100 && y > lastY) nav.classList.add('hidden');
+    else nav.classList.remove('hidden');
+    lastY = y;
+  });
 })();
 </script>
 

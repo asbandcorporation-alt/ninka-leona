@@ -1,788 +1,285 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ninka Leona | Pláticas Personalizadas sobre Liderazgo Consciente y Bienestar</title>
-<meta name="description" content="Reserva pláticas personalizadas con Ninka Leona. Especialista en Liderazgo Consciente, Manejo del Estrés y Productividad con Propósito. Agenda tu sesión hoy.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --cream: #FCFBF7;
-    --amber: #F7D08A;
-    --lavender: #E5D8F0;
-    --slate: #C0C0C0;
-    --copper: #B87333;
-    --deep: #2A2235;
-    --ink: #1F1A26;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Open Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    overflow-x: hidden;
-    line-height: 1.7;
-  }
-
-  /* ─── MESH BACKGROUND ─── */
-  .bg-mesh {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    background:
-      radial-gradient(ellipse at 20% 10%, rgba(229,216,240,0.6) 0%, transparent 55%),
-      radial-gradient(ellipse at 85% 25%, rgba(247,208,138,0.5) 0%, transparent 55%),
-      radial-gradient(ellipse at 65% 85%, rgba(184,115,51,0.15) 0%, transparent 55%),
-      var(--cream);
-  }
-
-  .stage { position: relative; z-index: 2; }
-
-  /* ─── NOISE ─── */
-  .noise {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    opacity: 0.04;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* ─── NAV ─── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 500;
-    padding: 1.4rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(252,251,247,0.7);
-    backdrop-filter: blur(14px) saturate(120%);
-    border-bottom: 1px solid rgba(184,115,51,0.08);
-  }
-
-  .logo {
-    font-family: 'EB Garamond', serif;
-    font-weight: 500;
-    font-size: 1.2rem;
-    letter-spacing: 0.25em;
-    color: var(--copper);
-    text-transform: uppercase;
-  }
-
-  .nav-socials {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-  }
-
-  .nav-socials a {
-    color: var(--deep);
-    text-decoration: none;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 500;
-    transition: color 0.3s;
-    position: relative;
-  }
-
-  .nav-socials a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--copper);
-    transition: width 0.3s;
-  }
-
-  .nav-socials a:hover { color: var(--copper); }
-  .nav-socials a:hover::after { width: 100%; }
-
-  /* ─── HERO / ABOVE THE FOLD ─── */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 6rem;
-    align-items: center;
-    padding: 10rem 4rem 6rem;
-    max-width: 1500px;
-    margin: 0 auto;
-  }
-
-  .hero-visual {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hero-img-wrapper {
-    position: relative;
-    width: 520px;
-    height: 640px;
-    border-radius: 300px 300px 40px 40px;
-    overflow: hidden;
-    background: linear-gradient(180deg, rgba(229,216,240,0.3), rgba(247,208,138,0.15));
-    box-shadow:
-      0 20px 80px rgba(42,34,53,0.15),
-      0 0 60px rgba(184,115,51,0.15);
-    border: 1px solid rgba(247,208,138,0.35);
-  }
-
-  .hero-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: saturate(0.85) contrast(0.95);
-    mix-blend-mode: multiply;
-  }
-
-  .hero-content { max-width: 560px; }
-
-  .hero-eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.45em;
-    color: var(--copper);
-    text-transform: uppercase;
-    margin-bottom: 1.8rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .hero-eyebrow::before {
-    content: '';
-    width: 50px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--copper));
-  }
-
-  h1 {
-    font-family: 'EB Garamond', serif;
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    line-height: 1.05;
-    color: var(--deep);
-    margin-bottom: 1.8rem;
-  }
-
-  .hero-title-ital {
-    font-style: italic;
-    color: var(--copper);
-  }
-
-  .hero-subtitle {
-    font-size: 1.05rem;
-    color: var(--deep);
-    opacity: 0.72;
-    font-weight: 300;
-    margin-bottom: 3rem;
-    max-width: 480px;
-    line-height: 1.9;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    padding: 1.05rem 2.2rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 0.82rem;
-    letter-spacing: 0.18em;
-    font-weight: 600;
-    text-transform: uppercase;
-    transition: all 0.4s;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--amber), #e6af5e);
-    color: var(--ink);
-    border: none;
-    box-shadow: 0 8px 30px rgba(184,115,51,0.25);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(184,115,51,0.4);
-    background: linear-gradient(135deg, #fbe2a8, var(--amber));
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--deep);
-    border: 1px solid rgba(42,34,53,0.25);
-    backdrop-filter: blur(6px);
-  }
-
-  .btn-outline:hover {
-    border-color: var(--copper);
-    color: var(--copper);
-    background: rgba(247,208,138,0.12);
-    transform: translateY(-3px);
-  }
-
-  /* ─── SECTIONS ─── */
-  section {
-    padding: 8rem 3rem;
-    max-width: 1300px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .section-header {
-    margin-bottom: 5rem;
-    text-align: center;
-  }
-
-  .section-tag {
-    font-size: 0.72rem;
-    letter-spacing: 0.5em;
-    color: var(--copper);
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-    font-weight: 600;
-  }
-
-  h2 {
-    font-family: 'EB Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 400;
-    letter-spacing: 0.03em;
-    color: var(--deep);
-    line-height: 1.15;
-  }
-
-  .section-line {
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--amber), transparent);
-    margin: 2rem auto 0;
-  }
-
-  /* ─── SOBRE MÍ (ESENCIA) ─── */
-  #sobre-mi {
-    background: linear-gradient(180deg, transparent 0%, rgba(229,216,240,0.25) 50%, transparent 100%);
-  }
-
-  .essence {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: 5rem;
-    align-items: center;
-  }
-
-  .essence-visual {
-    position: relative;
-    aspect-ratio: 4/5;
-    border-radius: 160px 160px 30px 30px;
-    overflow: hidden;
-    background: linear-gradient(180deg, rgba(247,208,138,0.25), rgba(229,216,240,0.2));
-    border: 1px solid rgba(247,208,138,0.4);
-    box-shadow: 0 30px 80px rgba(42,34,53,0.12);
-  }
-
-  .essence-visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: saturate(0.8) contrast(0.95);
-    mix-blend-mode: multiply;
-  }
-
-  .essence-content h3 {
-    font-family: 'EB Garamond', serif;
-    font-size: 2rem;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--copper);
-    margin-bottom: 1.8rem;
-    letter-spacing: 0.02em;
-  }
-
-  .essence-content p {
-    font-size: 1rem;
-    color: var(--deep);
-    opacity: 0.8;
-    margin-bottom: 1.4rem;
-    line-height: 2;
-  }
-
-  /* ─── ENCUENTROS (PLÁTICAS) ─── */
-  #encuentros {
-    background:
-      linear-gradient(180deg, rgba(245,240,250,0.6), rgba(252,251,247,0.8)),
-      linear-gradient(135deg, rgba(229,216,240,0.4), rgba(252,251,247,0.8));
-  }
-
-  .encounters-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.8rem;
-  }
-
-  .encounter-card {
-    padding: 2.8rem 2.2rem;
-    background: rgba(252,251,247,0.7);
-    border: 1px solid rgba(184,115,51,0.12);
-    border-radius: 28px;
-    backdrop-filter: blur(20px);
-    transition: all 0.5s;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .encounter-card::before {
-    content: '';
-    position: absolute;
-    inset: -30px;
-    background: radial-gradient(circle, rgba(247,208,138,0.35), transparent 70%);
-    opacity: 0;
-    transition: opacity 0.5s;
-  }
-
-  .encounter-card:hover::before { opacity: 1; }
-
-  .encounter-card:hover {
-    border-color: rgba(184,115,51,0.35);
-    transform: translateY(-6px);
-    box-shadow: 0 30px 70px rgba(42,34,53,0.15);
-  }
-
-  .encounter-icon {
-    width: 72px;
-    height: 72px;
-    margin: 0 auto 1.8rem;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(247,208,138,0.3), rgba(229,216,240,0.3));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-  .encounter-icon svg {
-    width: 32px;
-    height: 32px;
-    stroke: var(--copper);
-    fill: none;
-    stroke-width: 1.2;
-  }
-
-  .encounter-card h3 {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.5rem;
-    color: var(--deep);
-    margin-bottom: 1rem;
-    font-weight: 400;
-    letter-spacing: 0.03em;
-    position: relative;
-  }
-
-  .encounter-card p {
-    font-size: 0.92rem;
-    color: var(--deep);
-    opacity: 0.75;
-    line-height: 1.85;
-    position: relative;
-  }
-
-  /* ─── DIFERENCIALES ─── */
-  #diferenciales {
-    position: relative;
-  }
-
-  .dif-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-  }
-
-  .dif-item {
-    padding: 2.4rem;
-    background: rgba(252,251,247,0.6);
-    border: 1px solid rgba(184,115,51,0.1);
-    border-radius: 24px;
-    backdrop-filter: blur(10px);
-    transition: all 0.4s;
-  }
-
-  .dif-item:hover {
-    background: rgba(247,208,138,0.08);
-    border-color: rgba(184,115,51,0.35);
-    transform: translateY(-4px);
-  }
-
-  .dif-item h4 {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.4rem;
-    color: var(--copper);
-    margin-bottom: 0.8rem;
-    font-weight: 400;
-    font-style: italic;
-  }
-
-  .dif-item p {
-    font-size: 0.95rem;
-    color: var(--deep);
-    opacity: 0.75;
-    line-height: 1.85;
-  }
-
-  /* ─── CTA FINAL ─── */
-  #contacto {
-    text-align: center;
-  }
-
-  .final-cta {
-    margin-top: 2rem;
-    padding: 5rem 3rem;
-    background: linear-gradient(135deg, rgba(247,208,138,0.2), rgba(229,216,240,0.2));
-    border-radius: 40px;
-    border: 1px solid rgba(247,208,138,0.4);
-    text-align: center;
-    backdrop-filter: blur(30px);
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .final-cta::before {
-    content: '';
-    position: absolute;
-    top: -60%;
-    left: -60%;
-    width: 220%;
-    height: 220%;
-    background: radial-gradient(circle, rgba(247,208,138,0.25) 0%, transparent 55%);
-    transform: translate(-100%, -100%);
-    pointer-events: none;
-  }
-
-  .final-cta h3 {
-    font-family: 'EB Garamond', serif;
-    font-size: 2.8rem;
-    color: var(--copper);
-    font-style: italic;
-    margin-bottom: 1.2rem;
-    position: relative;
-  }
-
-  .final-cta > p {
-    color: var(--deep);
-    opacity: 0.75;
-    max-width: 540px;
-    margin: 0 auto 2.5rem;
-    position: relative;
-    line-height: 1.9;
-  }
-
-  .cta-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: relative;
-  }
-
-  .btn-copper {
-    background: linear-gradient(135deg, var(--copper), #9a5d28);
-    color: var(--cream);
-    border: none;
-    box-shadow: 0 8px 30px rgba(184,115,51,0.35);
-  }
-
-  .btn-copper:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(184,115,51,0.5);
-    background: linear-gradient(135deg, #c9843f, var(--copper));
-  }
-
-  /* ─── FOOTER ─── */
-  footer {
-    padding: 3rem;
-    text-align: center;
-    border-top: 1px solid rgba(184,115,51,0.12);
-    background: rgba(252,251,247,0.9);
-    backdrop-filter: blur(20px);
-  }
-
-  .footer-logo {
-    font-family: 'EB Garamond', serif;
-    font-size: 1rem;
-    letter-spacing: 0.4em;
-    color: var(--copper);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    margin: 1.5rem 0;
-    flex-wrap: wrap;
-  }
-
-  .footer-links a {
-    color: var(--deep);
-    text-decoration: none;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    transition: color 0.3s;
-    opacity: 0.65;
-  }
-
-  .footer-links a:hover { color: var(--copper); opacity: 1; }
-
-  .copyright {
-    font-size: 0.7rem;
-    color: var(--deep);
-    opacity: 0.45;
-    letter-spacing: 0.15em;
-  }
-
-  /* ─── REVEAL ─── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 960px) {
-    nav { padding: 1rem 1.8rem; }
-    .nav-socials { gap: 1.2rem; }
-    .hero {
-      grid-template-columns: 1fr;
-      text-align: center;
-      padding: 6rem 2rem 3rem;
-      gap: 3rem;
-    }
-    .hero-content { max-width: 100%; }
-    .hero-actions { justify-content: center; }
-    .hero-subtitle { margin: 0 auto 2rem; }
-    .hero-img-wrapper { width: 300px; height: 380px; }
-    section { padding: 5rem 2rem; }
-    .essence { grid-template-columns: 1fr; gap: 3rem; }
-    .essence-visual { max-width: 320px; margin: 0 auto; }
-    .cta-actions { flex-direction: column; align-items: center; }
-  }
-
-  @media (max-width: 600px) {
-    .logo { font-size: 1rem; letter-spacing: 0.3em; }
-    .nav-socials { display: none; }
-    h1 { font-size: 2.6rem; }
-    .btn { padding: 0.85rem 1.6rem; font-size: 0.75rem; letter-spacing: 0.14em; }
-    .final-cta { padding: 3rem 1.8rem; }
-    .final-cta h3 { font-size: 2rem; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninka Leona | Encuentros con el Ser Uno</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- ESTILOS MÍSTICOS (Paleta Sagrada) --- */
+        :root {
+            --fondo-cosmos: #0c0914; /* Un vacío profundo pero cálido, no negro absoluto */
+            --oro-divino: #dfb76c;   /* La luz del despertar, oro viejo y suave */
+            --lavanda-alma: #e2d9f3; /* Frecuencia de transmutación */
+            --blanco-puro: #fcfbf9;  /* Texto limpio */
+            --texto-suave: #a9a4b8;  /* Gris cósmico para sutileza */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--fondo-cosmos);
+            color: var(--blanco-puro);
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Lora', serif;
+            color: var(--oro-divino);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        /* --- GRADIENTE DE ENERGÍA (Fondo Cósmico) --- */
+        .bg-glow {
+            position: fixed;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(223,183,108,0.06) 0%, rgba(142,68,173,0.03) 50%, rgba(0,0,0,0) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- SECCIÓN PRINCIPAL (El Despertar) --- */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .simbolo-sagrado {
+            font-size: 2.5rem;
+            color: var(--oro-divino);
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+            animation: flotar 4s ease-in-out infinite;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(223, 183, 108, 0.2);
+        }
+
+        header p {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--lavanda-alma);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* --- BOTÓN SUTIL DE CONEXIÓN --- */
+        .btn-mistico {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--oro-divino);
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border: 1px solid rgba(223, 183, 108, 0.4);
+            border-radius: 50px;
+            transition: all 0.5s ease;
+            background: transparent;
+        }
+
+        .btn-mistico:hover {
+            background-color: var(--oro-divino);
+            color: var(--fondo-cosmos);
+            box-shadow: 0 0 25px rgba(223, 183, 108, 0.4);
+            border-color: var(--oro-divino);
+        }
+
+        /* --- SECCIONES DE CONTENIDO --- */
+        .contenedor {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .separador {
+            text-align: center;
+            margin: 4rem 0;
+            color: rgba(223, 183, 108, 0.3);
+            font-size: 1.5rem;
+        }
+
+        .sobre-mi {
+            text-align: center;
+        }
+
+        .sobre-mi h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sobre-mi p {
+            color: var(--texto-suave);
+            font-size: 1.1rem;
+            max-width: 750px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        /* --- ENCUENTROS DEL ALMA --- */
+        .encuentros {
+            margin-top: 4rem;
+        }
+
+        .encuentros h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .grid-encuentros {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-encuentros {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .carta-encuentro {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(169, 164, 184, 0.1);
+            padding: 2.5rem;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+        }
+
+        .carta-encuentro:hover {
+            border-color: rgba(223, 183, 108, 0.3);
+            background: rgba(255, 255, 255, 0.03);
+            transform: translateY(-5px);
+        }
+
+        .carta-encuentro h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .carta-encuentro p {
+            color: var(--texto-suave);
+            font-size: 0.95rem;
+        }
+
+        /* --- CONTACTO / INVOCACIÓN --- */
+        .contacto {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(to bottom, transparent, rgba(12, 9, 20, 0.8));
+        }
+
+        .contacto h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contacto p {
+            color: var(--lavanda-alma);
+            font-family: 'Lora', serif;
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(169, 164, 184, 0.4);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes flotar {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
 </head>
 <body>
 
-<div class="bg-mesh"></div>
-<div class="noise"></div>
+    <div class="bg-glow"></div>
 
-<div class="stage">
+    <header>
+        <div class="simbolo-sagrado">✧</div>
+        <h1>Ninka Leona</h1>
+        <p>Espacio dimensional para recordar tu divinidad, sanar el plano físico y fundirte en el Ser Uno.</p>
+        <a href="#encuentros" class="btn-mistico">Iniciar el Viaje</a>
+    </header>
 
-<nav id="nav">
-  <div class="logo">Ninka Leona</div>
-  <div class="nav-socials">
-    <a href="https://open.spotify.com/artist/7vumHnlggf6TSzjCi0B8V8">Spotify</a>
-    <a href="https://www.instagram.com/ninka_leona/">Instagram</a>
-    <a href="https://www.facebook.com/ninkaleona/">Facebook</a>
-    <a href="https://www.tiktok.com/@ninka.leona">TikTok</a>
-  </div>
-</nav>
+    <div class="separador">✦ ✦ ✦</div>
 
-<header class="hero">
-  <div class="hero-visual reveal">
-    <div class="hero-img-wrapper">
-      <img src="hero-spiritual.png" alt="Luz dorada atravesando las nubes - Ninka Leona" loading="eager">
-    </div>
-  </div>
+    <section class="contenedor sobre-mi">
+        <h2>La Esencia detrás del Silencio</h2>
+        <p>No soy un maestro, soy un espejo. Un puente fractal diseñado para reflejar la luz que ya habita en ti. Inspirado por la corriente cósmica de Ramtha, el vacío transformador de Osho y la verdad eterna de El Ser Uno, mi propósito es acompañarte a desmantelar la ilusión de la separación.</p>
+        <p>Aquí no venimos a aprender nada nuevo; venimos a recordar lo que tu alma ya sabe desde el origen de los tiempos.</p>
+    </section>
 
-  <div class="hero-content reveal">
-    <div class="hero-eyebrow">Consultora · Facilitadora · Conferencista</div>
-    <h1>El Despertar del Alma<br>con <span class="hero-title-ital">Ninka Leona</span></h1>
-    <p class="hero-subtitle">
-      Te invito a un viaje interior. Soy Ninka Leona, un puente hacia tu Ser Uno. Acompaño a las almas en su proceso de recordar y sanar a través de encuentros dinámicos y personalizados donde experimentas tu propia divinidad.
-    </p>
+    <div class="separador">✦ ✦ ✦</div>
 
-    <div class="hero-actions">
-      <a href="mailto:nkleona@afun.mx?subject=Quiero%20reservar%20un%20encuentro%20con%20Ninka%20Leona"
-         class="btn btn-primary">
-        Reservar tu Espacio
-      </a>
-      <a href="#sobre-mi" class="btn btn-outline">Conocer más</a>
-    </div>
-  </div>
-</header>
+    <section class="contenedor encuentros" id="encuentros">
+        <h2>Encuentros Personalizados</h2>
+        <div class="grid-encuentros">
+            
+            <div class="carta-encuentro">
+                <h3>01. El Despertar del Observador</h3>
+                <p>Sesiones individuales donde aprendemos a separarnos de la matriz del ego. Basado en las enseñanzas de Ramtha, activarás el poder de tu conciencia para colapsar nuevas realidades y sanar el cuerpo material.</p>
+            </div>
 
-<section id="sobre-mi">
-  <div class="section-header reveal">
-    <div class="section-tag">01 — esencia</div>
-    <h2>Sobre Mí</h2>
-    <div class="section-line"></div>
-  </div>
+            <div class="carta-encuentro">
+                <h3>02. Sintonía con el Ser Uno</h3>
+                <p>Alineación energética y diálogos profundos para comprender las leyes de los planos superiores. Un mapa de navegación espiritual para las almas que buscan trascender la dualidad de la tercera dimensión.</p>
+            </div>
 
-  <div class="essence">
-    <div class="essence-visual reveal">
-      <img src="hero-spiritual.png" alt="Ninka Leona - Esencia espiritual" loading="lazy">
-    </div>
-    <div class="essence-content reveal">
-      <h3>«La música es la memoria del alma»</h3>
-      <p>Mi camino no ha sido lineal. Desperté un día entendiendo que mi voz —y mi presencia— eran un instrumento de sanación. Más de 10 años de trayectoria musical me enseñaron a escuchar lo que yace debajo del ruido: la verdad que todos llevamos dentro.</p>
-      <p>Hoy, fusiono arte sagrado y facilitación humana para crear espacios donde el alma recuerda, el cuerpo se libera y el corazón se abre. No enseño nada que no tú ya sepas: solo ayudo a que lo recuerdes.</p>
-      <p>Cada encuentro es un viaje de regreso a ti. Sin máscaras, sin prisa, sin juicios. Solo tú, tu verdad y un espacio seguro para renacer.</p>
-    </div>
-  </div>
-</section>
+            <div class="carta-encuentro">
+                <h3>03. El Vacío Creador (Estilo Osho)</h3>
+                <p>Pláticas y meditaciones dinámicas enfocadas en destruir las programaciones mentales que te atan al pasado. Encontrar la paz absoluta en medio del caos del mundo moderno a través de la aceptación radical.</p>
+            </div>
 
-<section id="encuentros">
-  <div class="section-header reveal">
-    <div class="section-tag">02 — encuentros</div>
-    <h2>Nuestros Caminos<br>de Sanación</h2>
-    <div class="section-line"></div>
-  </div>
+            <div class="carta-encuentro">
+                <h3>04. Sanación del Linaje Cósmico</h3>
+                <p>Espacios íntimos dedicados a liberar bloqueos energéticos, miedos heredados y nudos del alma que impiden el flujo de tu energía vital superior.</p>
+            </div>
 
-  <div class="encounters-grid">
-    <div class="encounter-card reveal">
-      <div class="encounter-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
-      </div>
-      <h3>Conexión Interior</h3>
-      <p>Un espacio de reconexión sagrada a través de meditaciones guiadas, respiración consciente y la frecuencia curativa del sonido. Aquí el cuerpo recuerda cómo volver a casa.</p>
-    </div>
+        </div>
+    </section>
 
-    <div class="encounter-card reveal">
-      <div class="encounter-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v12M6 12h12" stroke-linecap="round"/></svg>
-      </div>
-      <h3>Recordando tu Poder</h3>
-      <p>Redescubre la fuerza que siempre fue tuya. Un encuentro de empoderamiento suave pero profundo para liberar creencias limitantes y reclamar tu voz en el mundo.</p>
-    </div>
+    <section class="contacto" id="contacto">
+        <h2>¿Sientes el llamado?</h2>
+        <p>"Cuando el discípulo está listo, el mensaje aparece."</p>
+        <a href="mailto:nkleona@afun.mx" class="btn-mistico">Reservar un Espacio en el Tiempo</a>
+    </section>
 
-    <div class="encounter-card reveal">
-      <div class="encounter-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10"/><path d="M22 12c0-5.52-4.48-10-10-10"/><circle cx="12" cy="12" r="3"/></svg>
-      </div>
-      <h3>Fluir con el Ser Uno</h3>
-      <p>Aprende a navegar la vida desde la confianza, no desde el control. Sesiones para alinearte con tu propósito y fluir en lugar de empujar.</p>
-    </div>
-  </div>
-</section>
-
-<section id="diferenciales">
-  <div class="section-header reveal">
-    <div class="section-tag">03 — diferenciación</div>
-    <h2>¿Por Qué este Encuentro<br>es Diferente?</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="dif-list">
-    <div class="dif-item reveal">
-      <h4>Un Puente hacia Ti</h4>
-      <p>Las sesiones no son enseñanzas impuestas, sino herramientas para que recuerdes tu propia verdad. No te doy respuestas: te ayudo a escuchar las que ya tienes dentro.</p>
-    </div>
-
-    <div class="dif-item reveal">
-      <h4>Acompañañamiento Intuitivo</h4>
-      <p>Cada encuentro es único y guiado por la energía del momento y las necesidades de tu alma. No hay guiones, solo presencia nutritiva y escucha profunda.</p>
-    </div>
-
-    <div class="dif-item reveal">
-      <h4>Un Templo de Paz</h4>
-      <p>Encontrarás un espacio seguro y sagrado para vulnerarte, sanar y renacer. Un lugar donde ser quien eres sin juicio, donde el cambio empieza a gestarse.</p>
-    </div>
-  </div>
-</section>
-
-<section id="contacto">
-  <div class="section-header reveal">
-    <div class="section-tag">04 — contacto</div>
-    <h2>¿Listo para Iniciar<br>tu Viaje?</h2>
-    <div class="section-line" style="margin: 2rem auto 0;"></div>
-  </div>
-
-  <div class="final-cta reveal">
-    <h3>Reserva tu Espacio</h3>
-    <p>
-      Usa el botón a continuación para ponerte en contacto y discutir cómo podemos colaborar. Respuesta en menos de 24 horas.
-    </p>
-    <div class="cta-actions">
-      <a href="mailto:nkleona@afun.mx?subject=Quiero%20reservar%20un%20encuentro%20con%20Ninka%20Leona"
-         class="btn btn-copper">
-        Contactar por Correo
-      </a>
-      <a href="https://wa.me/5212345678901?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro%20personalizado"
-         class="btn btn-outline" target="_blank" rel="noopener">
-        Enviar Mensaje por WhatsApp
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-logo">✦ Ninka Leona</div>
-  <div class="footer-links">
-    <a href="https://open.spotify.com/artist/7vumHnlggf6TSzjCi0B8V8">Spotify</a>
-    <a href="https://www.instagram.com/ninka_leona/">Instagram</a>
-    <a href="https://www.facebook.com/ninkaleona/">Facebook</a>
-    <a href="https://www.tiktok.com/@ninka.leona">TikTok</a>
-  </div>
-  <div class="copyright">© 2025 Ninka Leona · Facilitadora del Despertar · Todos los derechos reservados</div>
-</footer>
-
-</div>
-
-<script>
-(() => {
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-})();
-</script>
+    <footer>
+        <p>Ninka Leona © 2026 • Hecho en resonancia armónica con el Universo</p>
+    </footer>
 
 </body>
 </html>

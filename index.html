@@ -17,7 +17,6 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -52,6 +51,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
   }
 
   .logo {
@@ -62,14 +63,21 @@
     text-transform: uppercase;
   }
 
-  .nav-links { display: flex; gap: 1.2rem; }
+  .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+
   .nav-links a {
     color: var(--suave);
     text-decoration: none;
     font-size: 0.72rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
+    transition: color 0.3s;
   }
+
   .nav-links a:hover { color: var(--oro); }
 
   /* HERO */
@@ -95,7 +103,9 @@
   }
 
   .hero-img img {
-    width: 100%; height: 100%; object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     filter: saturate(0.85) contrast(1.05);
   }
 
@@ -141,6 +151,7 @@
     transition: all 0.5s ease;
     background: transparent;
     font-size: 0.8rem;
+    display: inline-block;
   }
 
   .btn-mistico:hover {
@@ -152,7 +163,6 @@
 
   /* SECTIONS */
   section { padding: 5rem 1.5rem; }
-
   .contenedor { max-width: 900px; margin: 0 auto; }
 
   .separador {
@@ -172,9 +182,95 @@
     margin: 0 auto 1.2rem;
   }
 
+  /* MÚSICA */
+  #musica {
+    background: linear-gradient(180deg, transparent, rgba(142,68,173,0.06), transparent);
+  }
+
+  .musica-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .musica-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .track-card {
+    padding: 1.8rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(169,164,184,0.15);
+    border-radius: 20px;
+    transition: all 0.4s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .track-card:hover {
+    border-color: rgba(223,183,108,0.4);
+    background: rgba(255,255,255,0.04);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+
+  .track-art {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+    background: rgba(223,183,108,0.08);
+  }
+
+  .track-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.8);
+  }
+
+  .track-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .track-meta {
+    color: var(--suave);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .track-play {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(223,183,108,0.12);
+    border: 1px solid rgba(223,183,108,0.3);
+    border-radius: 25px;
+    color: var(--oro);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .track-card:hover .track-play {
+    background: rgba(223,183,108,0.2);
+    border-color: var(--oro);
+  }
+
   /* ENCUENTROS */
   .encuentros { margin-top: 3rem; }
-  .encuentros h2, .contacto h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 2.5rem; text-align: center; }
+  .encuentros h2, .contacto h2 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
 
   .grid-encuentros {
     display: grid;
@@ -203,6 +299,57 @@
   .carta-encuentro h3 { font-size: 1.15rem; margin-bottom: 0.8rem; }
   .carta-encuentro p { color: var(--suave); font-size: 0.9rem; line-height: 1.75; }
 
+  /* REDES */
+  #redes {
+    background: linear-gradient(180deg, transparent, rgba(223,183,108,0.04), transparent);
+  }
+
+  .redes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.2rem;
+    margin-top: 3rem;
+  }
+
+  .red-card {
+    padding: 1.5rem 1rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(169,164,184,0.12);
+    border-radius: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--blanco);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .red-card:hover {
+    border-color: var(--oro);
+    background: rgba(223,183,108,0.08);
+    transform: translateY(-4px);
+  }
+
+  .red-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .red-card strong {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+  }
+
+  .red-card span {
+    color: var(--suave);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
   /* CONTACTO */
   .contacto {
     text-align: center;
@@ -223,6 +370,31 @@
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .whatsapp-float {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 600;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25d366;
+    color: white;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(37,211,102,0.5);
+    transition: transform 0.3s ease;
+    border: none;
+  }
+
+  .whatsapp-float:hover {
+    transform: scale(1.1);
   }
 
   footer {
@@ -237,6 +409,7 @@
     nav { padding: 1.4rem 3rem; }
     .nav-links a { font-size: 0.75rem; }
     .hero-img { width: 340px; }
+    section { padding: 6rem 2rem; }
   }
 </style>
 </head>
@@ -250,7 +423,9 @@
   <div class="logo">Ninka Leona</div>
   <div class="nav-links">
     <a href="#sobre-mi">Esencia</a>
+    <a href="#musica">Música</a>
     <a href="#encuentros">Encuentros</a>
+    <a href="#redes">Redes</a>
     <a href="#contacto">Contacto</a>
   </div>
 </nav>
@@ -271,6 +446,44 @@
   <h2>La Esencia detrás del Silencio</h2>
   <p>No soy un maestro, soy un espejo. Un puente fractal diseñado para reflejar la luz que ya habita en ti. Inspirado por la corriente cósmica de Ramtha, el vacío transformador de Osho y la verdad eterna de El Ser Uno, mi propósito es acompañarte a desmantelar la ilusión de la separación.</p>
   <p>Aquí no venimos a aprender nada nuevo; venimos a recordar lo que tu alma ya sabe desde el origen de los tiempos.</p>
+</section>
+
+<div class="separador">✦ ✦ ✦</div>
+
+<section class="contenedor" id="musica">
+  <div style="text-align:center;">
+    <div class="section-tag" style="color:var(--oro); font-size:0.75rem; letter-spacing:0.4em; text-transform:uppercase; margin-bottom:1rem;">Música</div>
+    <h2>Mis Canciones</h2>
+    <p style="color:var(--lavanda); font-family:'Lora',serif; font-style:italic; max-width:500px; margin:0 auto 2rem;">
+      Cada canción es una frecuencia para el alma. Escucha y siente.
+    </p>
+  </div>
+
+  <div class="musica-grid">
+    <a class="track-card" href="https://open.spotify.com/intl-es/track/0WWiWvHth7X3uA9p4y5Skw" target="_blank" rel="noopener">
+      <div class="track-art">
+        <img src="https://i.scdn.co/image/ab67616d00001e02edf6ca1b2a76ca8794728d1d" alt="Tú Sabes" loading="lazy">
+      </div>
+      <h3>Tú Sabes</h3>
+      <div class="track-meta">Single · 2025 · 4:59</div>
+      <span class="track-play">▶ Escuchar en Spotify</span>
+    </a>
+
+    <a class="track-card" href="https://open.spotify.com/track/69z4iAUG3rR3eVxTNirIrL" target="_blank" rel="noopener">
+      <div class="track-art">
+        <img src="https://i.scdn.co/image/ab67616d00001e02c1ac37e954185a6d96bdc74e" alt="Yo Me Tengo A Mi" loading="lazy">
+      </div>
+      <h3>Yo Me Tengo A Mi</h3>
+      <div class="track-meta">Single · 2025 · 5:20</div>
+      <span class="track-play">▶ Escuchar en Spotify</span>
+    </a>
+  </div>
+
+  <div style="text-align:center; margin-top:2.5rem;">
+    <a href="https://open.spotify.com/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener" class="btn-mistico" style="font-size:0.75rem; padding:0.8rem 1.8rem;">
+      Ver todo en Spotify
+    </a>
+  </div>
 </section>
 
 <div class="separador">✦ ✦ ✦</div>
@@ -302,12 +515,57 @@
   </div>
 </section>
 
+<div class="separador">✦ ✦ ✦</div>
+
+<section class="contenedor" id="redes">
+  <div style="text-align:center;">
+    <h2>Conexión</h2>
+    <p style="color:var(--lavanda); font-family:'Lora',serif; font-style:italic; max-width:500px; margin:0 auto 2rem;">
+      Todas las redes son puentes. El alma está detrás de cada una.
+    </p>
+  </div>
+
+  <div class="redes-grid">
+    <a class="red-card" href="https://open.spotify.com/artist/7vumHnlggf6TSzjCi0B8V8" target="_blank" rel="noopener">
+      <span class="red-icon">🎵</span>
+      <strong>Spotify</strong>
+      <span>Escuchar</span>
+    </a>
+
+    <a class="red-card" href="https://www.instagram.com/ninka_leona/" target="_blank" rel="noopener">
+      <span class="red-icon">📸</span>
+      <strong>Instagram</strong>
+      <span>@ninka_leona</span>
+    </a>
+
+    <a class="red-card" href="https://www.facebook.com/ninkaleona/" target="_blank" rel="noopener">
+      <span class="red-icon">📘</span>
+      <strong>Facebook</strong>
+      <span>Ninka Leona</span>
+    </a>
+
+    <a class="red-card" href="https://www.tiktok.com/@ninka.leona" target="_blank" rel="noopener">
+      <span class="red-icon">🎬</span>
+      <strong>TikTok</strong>
+      <span>@ninka.leona</span>
+    </a>
+
+    <a class="red-card" href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" target="_blank" rel="noopener">
+      <span class="red-icon">💬</span>
+      <strong>WhatsApp</strong>
+      <span>777 219 2422</span>
+    </a>
+  </div>
+</section>
+
+<div class="separador">✦ ✦ ✦</div>
+
 <section class="contacto" id="contacto">
   <h2>¿Sientes el llamado?</h2>
   <p>"Cuando el discípulo está listo, el mensaje aparece."</p>
   <div class="contacto-actions">
-    <a href="mailto:nkleona@afun.mx?subject=Quiero%20reservar%20un%20espacio%20en%20el%20tiempo" class="btn-mistico">Reservar un Espacio</a>
-    <a href="https://wa.me/5212345678901?text=Hola%20Ninka,%20siento%20el%20llamado" class="btn-mistico" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="mailto:nkleona@afun.mx?subject=Quiero%20reservar%20un%20espacio%20en%20el%20tiempo" class="btn-mistico">Reservar por Correo</a>
+    <a href="https://wa.me/527772192422?text=Hola%20Ninka,%20siento%20el%20llamado" class="btn-mistico" target="_blank" rel="noopener">Escribir por WhatsApp</a>
   </div>
 </section>
 
@@ -315,10 +573,13 @@
   <p>Ninka Leona © 2026 • Hecho en resonancia armónica con el Universo</p>
 </footer>
 
+<a class="whatsapp-float" href="https://wa.me/527772192422?text=Hola%20Ninka,%20me%20interesa%20un%20encuentro" target="_blank" rel="noopener" aria-label="WhatsApp">
+  💬
+</a>
+
 </div>
 
 <script>
-/* ─── COSMOS CANVAS ─── */
 (() => {
   const c = document.getElementById('cosmos');
   const ctx = c.getContext('2d');
@@ -345,7 +606,6 @@
     t += 0.002;
     ctx.clearRect(0, 0, W, H);
 
-    // glow central sutil
     const gx = W * 0.5 + Math.sin(t * 0.3) * W * 0.2;
     const gy = H * 0.35 + Math.cos(t * 0.2) * H * 0.2;
     const rg = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(W, H) * 0.4);
